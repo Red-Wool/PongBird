@@ -11,8 +11,6 @@ public class InventoryManager : MonoBehaviour
 
     public TextMeshProUGUI coinText;
 
-    public GoldUFO goldUFO;
-
     private string[] names = { "HighJump", "PaddleBoost", "SuperFast", "ThrillTime", "InfipaddleBounds", "DrillEscort", "PipeDream", "DrillMode"};
 
     private List<ItemToggle> inventory;
@@ -36,7 +34,7 @@ public class InventoryManager : MonoBehaviour
             inventory.Add(new ItemToggle(names[i], false));
         }
 
-        coins = 0;
+        coins = 999;
     }
 
     // Update is called once per frame
@@ -131,12 +129,6 @@ public class InventoryManager : MonoBehaviour
     public List<ItemToggle> GetInventoryList()
     {
         return inventory;
-    }
-
-    public void ActivateGoldUFO(int score)
-    {
-        goldUFO.StartSpawn(score);
-        
     }
 
     private void ChangeInventory(int index, bool b, bool t)

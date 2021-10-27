@@ -74,11 +74,6 @@ public class GameManager : MonoBehaviour
 
         shs.StageHazardSetUp(score, direction);
 
-        if (score % 6 == 0 || Random.Range(0f, 1f) < 0.1f)
-        {
-            InventoryManager.instance.ActivateGoldUFO(Mathf.Clamp(score / (5 + score / 4), 1, 4));
-        }
-
         CalculateSpeed();
     }
     public void UpdateScore(int val)
@@ -116,12 +111,9 @@ public class GameManager : MonoBehaviour
         retryMenu.SetActive(false);
         shopMenu.SetActive(false);
 
-        player.Reset();
-        player.bounceVal = (InventoryManager.instance.CheckItemValid("HighJump")) ? 15f : 10f;
+        
 
         score = 0;
-
-        nextSpeedUp = 5;
 
         if (InventoryManager.instance.CheckItemValid("DrillMode"))
         {
@@ -130,15 +122,17 @@ public class GameManager : MonoBehaviour
 
         speedUpTextTimer = 1f;
 
+        nextSpeedUp = 5;
+
         if (InventoryManager.instance.CheckItemValid("SuperFast"))
         {
             nextSpeedUp = 0;
             currentSpeed = 1.4f;
         }
-        
-        CalculateSpeed();
 
         ms.SetUp();
+
+        CalculateSpeed();
 
         UpdateScore(0);
 

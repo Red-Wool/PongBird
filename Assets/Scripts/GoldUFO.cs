@@ -7,11 +7,16 @@ public class GoldUFO : MonoBehaviour
     private float coinTimer;
     private int tempScore;
 
-    public GameObject coinPrefab;
-    public Vector2 velocityRange;
+    [Header("GoldUFO Info"), Space(10),
+     SerializeField] private Vector2 velocityRange;
+    [SerializeField] private AnimationCurve xDist;
+    [SerializeField] private AnimationCurve yDist;
 
-    public AnimationCurve xDist;
-    public AnimationCurve yDist;
+    [Header("References"), Space(10),
+     SerializeField] private GameObject coinPrefab;
+    [SerializeField] private ParticleSystem coinPopPS;
+
+    private List<GameObject> coinPool = new List<GameObject>();
 
     private float moveTimer;
     private bool direction = false;
@@ -23,6 +28,8 @@ public class GoldUFO : MonoBehaviour
     {
         //Debug.Log("Test");
         gameObject.SetActive(false);
+
+        CoinAddPool(20);
     }
 
     // Update is called once per frame
@@ -48,9 +55,14 @@ public class GoldUFO : MonoBehaviour
 
     public void SpawnCoin(int amount)
     {
+        coinPopPS.gameObject.transform.position = this.transform.position;
+        coinPopPS.Play();
+
+        //Spawn Coins
         for (int i = 0; i < amount; i++)
         {
-            tempCoin = Instantiate(coinPrefab, this.transform.position, Quaternion.identity);
+            tempCoin = GetCoin();//Instantiate(coinPrefab, this.transform.position, Quaternion.identity);
+            tempCoin.transform.position = transform.position;
             tempCoin.GetComponent<Rigidbody2D>().velocity = new Vector2(
                 Random.Range(velocityRange.x * -1, velocityRange.x),
                 Random.Range(1f, velocityRange.y));
@@ -68,6 +80,36 @@ public class GoldUFO : MonoBehaviour
 
         tempScore = score;
     }
+    
+    public GameObject CoinAddPool(int count)
+    {
+        GameObject coin = null;
+        for (int i = 0; i < count; i++)
+        {
+            coin = Instantiate(coinPrefab, Vector3.zero, Quaternion.identity);
 
+            coin.SetActive(false);
 
+            coinPool.Add(coin);
+
+            //rocket = tempRocket;
+        }
+        return coin;
+    }
+
+    public GameObject GetCoin()
+    {
+        for (int i = 0; i < coinPool.Count; i++)
+        {
+            if (!coinPool[i].activeInHierarchy)
+            {
+                coinPool[i].SetActive(true);
+
+                return coinPool[i];
+            }
+        }
+
+        tempCoin = CoinAddPool(10);
+        return tempCoin;
+    }
 }

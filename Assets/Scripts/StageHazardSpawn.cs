@@ -4,33 +4,38 @@ using UnityEngine;
 
 public class StageHazardSpawn : MonoBehaviour
 {
-    public GameObject pipe;
+    //Pipe Varibles
+    [Header("Pipe Info"), Space(10),
+     SerializeField] private Vector2 pipeRange;
+    [SerializeField] private GameObject[] pipeObjects;
 
-    public Vector2 pipeRange;
-    public GameObject[] pipeObjects;
-
+    [SerializeField] private AnimationCurve pipeSize;
 
     private bool[] pipeEnabled;
     private Vector2[] target;
     private float pipeTimer;
-    public AnimationCurve pipeSize;
 
     private Vector2 tempPos;
 
+    //Drill Varibles
+    [Header("Drill Info"), Space(10),
+     SerializeField] private GameObject rocketPrefab;
+    [SerializeField] private ParticleSystem rocketPS;
+
     private float rocketTimer;
-    public GameObject rocketPrefab;
     private GameObject tempRocket;
     private List<GameObject> rocketPool;
     private Vector2[] rocketPositions;
     private float[] rocketIntervals = { 999f, 999f, 999f, 999f, 999f, 999f, 999f, 999f, 999f, 999f};//10
 
-    public ParticleSystem rocketPS;
-
-    public GameObject protectDrill;
+    //GoldUFO Varibles
+    [Header("GoldUFO Info"), Space(10),
+     SerializeField] private GoldUFO goldUFO;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Set Up Varibles
         pipeEnabled = new bool[pipeObjects.Length];
         target = new Vector2[pipeObjects.Length];
 
@@ -46,16 +51,20 @@ public class StageHazardSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Need to optimize these pipe things
         pipeTimer += Time.deltaTime * 3f;
         for (int i = 0; i < pipeObjects.Length; i++)
         {
+            //Lerp to position randomly selected before
             pipeObjects[i].transform.position = Vector2.Lerp(pipeObjects[i].transform.position, target[i], 0.2f);
 
+            //Don't change pipe size if it is the same
             if ((pipeObjects[i].transform.localScale.y == pipeSize.Evaluate(1f) && !pipeEnabled[i]) || (pipeObjects[i].transform.localScale.y == pipeSize.Evaluate(0f) && pipeEnabled[i]))
             {
                 continue;
             }
 
+            //Stuff to change pipe if on or off
             tempPos = pipeObjects[i].transform.localScale;
 
             if (pipeEnabled[i])
@@ -70,11 +79,16 @@ public class StageHazardSpawn : MonoBehaviour
 
         }
 
+        //Check if Pipe Dream
         if (!InventoryManager.instance.CheckItemValid("PipeDream"))
         {
+            //Manage Rockets
             rocketTimer += Time.deltaTime * Time.timeScale;
+
+            //goes through rocket intervals
             for (int i = 0; i < rocketIntervals.Length; i++)
             {
+                //Send the warning before they come
                 if (rocketIntervals[i] - 2f < rocketTimer && Mathf.Abs(rocketPositions[i].x) == 14f)
                 {
                     //Debug.Log("ParticleActivate!");
@@ -83,11 +97,11 @@ public class StageHazardSpawn : MonoBehaviour
 
                     rocketPositions[i].x = (rocketPositions[i].x == 14f) ? 19f : -19f;
                 }
-                else if (rocketIntervals[i] < rocketTimer)
+                else if (rocketIntervals[i] < rocketTimer) // Launch Rocket when it is time
                 {
                     tempRocket = GetRocket();
                     tempRocket.transform.position = rocketPositions[i];
-                    tempRocket.GetComponent<FlyingDrill>().SetUpRocket((rocketPositions[i].x == -19f));
+                    tempRocket.GetComponent<FlyingDrill>().SetUpRocket(rocketPositions[i].x == -19f);
 
                     rocketIntervals[i] = 999f;
                 }
@@ -103,11 +117,11 @@ public class StageHazardSpawn : MonoBehaviour
         target[1].x = Random.Range(pipeRange.x * -1f, pipeRange.x);
         target[2].x = 13.5f;
 
-        
+        //Setup Drills
         if (!InventoryManager.instance.CheckItemValid("PipeDream"))
         {
             int num = (int)Mathf.Clamp(Mathf.Round(Random.Range(0f, (score == 0) ? -10 : 
-                score * ((InventoryManager.instance.CheckItemValid("ThrillTime")) ? 1f : 0.05f) + 1.5f)) - CalculateBoolArray(pipeEnabled) * 0.8f, 0f, 10f);
+                score * ((InventoryManager.instance.CheckItemValid("ThrillTime")) ? 1f : 0.1f) + 1.5f)) - CalculateBoolArray(pipeEnabled) * 0.8f, 0f, 10f);
 
             //Setup Rockets
             rocketTimer = 0f;
@@ -118,8 +132,15 @@ public class StageHazardSpawn : MonoBehaviour
                 rocketPositions[i] = new Vector2((Random.Range(0f, 1f) < 0.5f) ? -14f : 14f, Random.Range(pipeRange.y * -1, pipeRange.y));
             }
         }
+
+        //Setup GoldUFO
+        if (score % 6 == 0 || Random.Range(0f, 1f) < 0.1f)
+        {
+            ActivateGoldUFO(Mathf.Clamp(score / (5 + score / 4), 1, 4));
+        }
     }
 
+    //Pipe Setup Method
     private void SetUpPipe(bool enable, bool direction)
     {
         if (!enable)
@@ -191,5 +212,10 @@ public class StageHazardSpawn : MonoBehaviour
         
         tempRocket = RocketAddPool(10);
         return tempRocket;
+    }
+
+    public void ActivateGoldUFO(int score)
+    {
+        goldUFO.StartSpawn(score);
     }
 }

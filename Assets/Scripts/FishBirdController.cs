@@ -19,6 +19,8 @@ public class FishBirdController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
 
+    public ParticleSystem flapPS;
+
     Vector3 pos;
 
     // Start is called before the first frame update
@@ -43,6 +45,8 @@ public class FishBirdController : MonoBehaviour
             if (Input.GetKeyDown(key))
             {
                 pos.y = bounceVal;
+
+                flapPS.Play();
             }
 
             rb.velocity = pos;
@@ -67,7 +71,7 @@ public class FishBirdController : MonoBehaviour
         if (collision.transform.tag == "Coin")
         {
             gm.GetCoin(1);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 

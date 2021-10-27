@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PaddleBounce : MonoBehaviour
 {
-    public KeyCode key;
+    [Header("Drill Info"), Space(10),
+    SerializeField] private KeyCode key; 
+    [SerializeField] private float bounceVal;
 
-    public float bounceVal;
-
-    public GameManager gm;
+    [Header("Reference"), SerializeField, Space(10)] private GameManager gm;
 
     private Rigidbody2D rb;
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class PaddleBounce : MonoBehaviour
     {
         if (Input.GetKeyDown(key))
         {
-            rb.velocity = Vector3.up * (InventoryManager.instance.CheckItemValid("PaddleBoost") ? 15 : bounceVal);
+            rb.velocity = Vector3.up * bounceVal;
         }
     }
 
@@ -31,7 +31,12 @@ public class PaddleBounce : MonoBehaviour
         if (collision.transform.tag == "Coin")
         {
             gm.GetCoin(1);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
+    }
+    
+    public void SetBounceVal(float val)
+    {
+        bounceVal = val;
     }
 }
