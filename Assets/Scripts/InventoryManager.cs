@@ -143,7 +143,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < inventory.Count; i++)
         {
-            if (inventory[i].getID() == index)
+            if (inventory[i].ID == index)
             {
                 return i;
             }
@@ -153,23 +153,3 @@ public class InventoryManager : MonoBehaviour
     }
 }
 
-public struct ItemToggle
-{
-    private string id;
-    public bool bought;
-    public bool toggled;
-
-    public string getID() { return id; }
-
-    public ItemToggle(string name, bool value)
-    {
-        id = name;
-        bought = value;
-        toggled = value;
-    }
-
-    public override string ToString()
-    {
-        return "ID: " + id + " Bought: " + bought + " Toggled: " + toggled;
-    }
-}

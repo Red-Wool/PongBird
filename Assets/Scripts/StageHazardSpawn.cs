@@ -11,8 +11,8 @@ public class StageHazardSpawn : MonoBehaviour
 
     [SerializeField] private AnimationCurve pipeSize;
 
-    private bool[] pipeEnabled;
-    private Vector2[] target;
+    private bool[] pipeEnabled = new bool[3];
+    private Vector2[] target = new Vector2[3];
     private float pipeTimer;
 
     private Vector2 tempPos;
@@ -31,6 +31,9 @@ public class StageHazardSpawn : MonoBehaviour
     //GoldUFO Varibles
     [Header("GoldUFO Info"), Space(10),
      SerializeField] private GoldUFO goldUFO;
+
+    [Header("Other Info"), Space(10)]
+    public bool coop;
 
     // Start is called before the first frame update
     void Start()
@@ -52,11 +55,11 @@ public class StageHazardSpawn : MonoBehaviour
     void Update()
     {
         //Need to optimize these pipe things
-        pipeTimer += Time.deltaTime * 3f;
+        pipeTimer += Time.deltaTime * (coop ? 0.2f : 3f);
         for (int i = 0; i < pipeObjects.Length; i++)
         {
             //Lerp to position randomly selected before
-            pipeObjects[i].transform.position = Vector2.Lerp(pipeObjects[i].transform.position, target[i], 0.2f);
+            pipeObjects[i].transform.position = Vector2.Lerp(pipeObjects[i].transform.position, target[i], coop ? 0.004f : 0.2f);
 
             //Don't change pipe size if it is the same
             if ((pipeObjects[i].transform.localScale.y == pipeSize.Evaluate(1f) && !pipeEnabled[i]) || (pipeObjects[i].transform.localScale.y == pipeSize.Evaluate(0f) && pipeEnabled[i]))

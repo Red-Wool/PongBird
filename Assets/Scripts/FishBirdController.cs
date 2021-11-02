@@ -14,12 +14,22 @@ public class FishBirdController : MonoBehaviour
 
     private Vector3 beginPos;
 
+    private bool isInvinicible;
+    private GameObject lastPaddleHit;
+
+    private Vector3 bounceDirection;
+    private float bounceEffectTimer;
+
     bool posDirection = true;
 
     Rigidbody2D rb;
     SpriteRenderer sr;
 
     public ParticleSystem flapPS;
+
+    private PlayerMode pm;
+
+    //public PlayerMode Mode { set { pm = value; } }
 
     Vector3 pos;
 
@@ -30,6 +40,8 @@ public class FishBirdController : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        pm = PlayerMode.Flapper;
 
         dead = false;
     }
@@ -44,9 +56,32 @@ public class FishBirdController : MonoBehaviour
 
             if (Input.GetKeyDown(key))
             {
+                switch (pm)
+                {
+                    case PlayerMode.Flapper:
+
+                        break;
+                    case PlayerMode.Drill:
+
+                        break;
+                    case PlayerMode.UFO:
+
+                        break;
+                }
                 pos.y = bounceVal;
 
+                bounceEffectTimer *= 0.5f;
+
                 flapPS.Play();
+            }
+
+            if (bounceEffectTimer > 0)
+            {
+                bounceEffectTimer -= Time.deltaTime * Time.timeScale * 2;
+
+                bounceDirection.y *= bounceEffectTimer / 2f;
+
+                pos += bounceDirection * (16f * bounceEffectTimer);
             }
 
             rb.velocity = pos;
@@ -59,11 +94,20 @@ public class FishBirdController : MonoBehaviour
         if (collision.transform.tag == "Paddle")
         {
             //Debug.Log("Hit");
-            sr.flipX = !sr.flipX;
+            if (lastPaddleHit != collision.gameObject)
+            {
+                lastPaddleHit = collision.gameObject;
 
-            gm.HitPaddle(posDirection);
+                gm.HitPaddle(posDirection);
 
-            posDirection = !posDirection;
+                sr.flipX = !sr.flipX;
+                posDirection = !posDirection;
+            }
+        }
+        else if (collision.transform.tag == "Player")
+        {
+            bounceDirection = GetDirection(collision.transform.position);
+            bounceEffectTimer = 1f;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -87,13 +131,50 @@ public class FishBirdController : MonoBehaviour
 
         GetComponent<BoxCollider2D>().enabled = true;
 
+        lastPaddleHit = null;
+
         posDirection = true;
         sr.flipX = false;
     }
 
-    public void LoseGame()
+    public void SetInvincible(float time)
     {
+        isInvinicible = true;
+        StartCoroutine("InvincibleCountdown", time);
+    }
+
+    private IEnumerable InvincibleCountdown(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        isInvinicible = false;
+    }
+
+    public void Defeat(bool trueKill)
+    {
+        if (trueKill || !isInvinicible)
+        {
+            DisablePlayer();
+
+            gm.PlayerDefeated(this.gameObject);
+        }
         Debug.Log("Dead");
+        
+    }
+
+    public Vector3 GetDirection(Vector3 otherPos)
+    {
+        Vector3 tempPos = transform.position - otherPos;
+
+        tempPos.y *= 0.1f;
+
+        tempPos /= tempPos.magnitude;
+
+        return tempPos;
+    }
+
+    public void DisablePlayer()
+    {
         rb.freezeRotation = false;
         rb.angularVelocity = 999f;
 
@@ -101,8 +182,8 @@ public class FishBirdController : MonoBehaviour
 
         dead = true;
         rb.velocity += Vector2.up * rb.velocity * -0.6f;
-        rb.velocity += Vector2.up * Random.Range(5f,15f);
+        rb.velocity += Vector2.up * Random.Range(5f, 15f);
 
-        gm.LoseGame();
+        lastPaddleHit = null;
     }
 }

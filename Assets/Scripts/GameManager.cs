@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour
 
     private float currentSpeed = 1f;
 
-    public StageHazardSpawn shs;
-    public ModifierSetup ms;
-    public FishBirdController player;
+    public StageHazardSpawn stageHs;
+    public ModifierSetup modSetup;
+    public PlayerManager playerM;
+    //public FishBirdController player;
 
     [SerializeField]
     private TextMeshProUGUI scoreboard;
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
     {
         UpdateScore(1);
 
-        shs.StageHazardSetUp(score, direction);
+        stageHs.StageHazardSetUp(score, direction);
 
         CalculateSpeed();
     }
@@ -117,7 +118,7 @@ public class GameManager : MonoBehaviour
 
         if (InventoryManager.instance.CheckItemValid("DrillMode"))
         {
-            player.GetComponent<Animator>().runtimeAnimatorController = skin;
+            //player.GetComponent<Animator>().runtimeAnimatorController = skin;
         }
 
         speedUpTextTimer = 1f;
@@ -130,13 +131,13 @@ public class GameManager : MonoBehaviour
             currentSpeed = 1.4f;
         }
 
-        ms.SetUp();
+        modSetup.SetUp();
 
         CalculateSpeed();
 
         UpdateScore(0);
 
-        //shs.StageHazardSetUp(0, true);
+        stageHs.StageHazardSetUp(0, true);
 
         music.Play();
     }
@@ -285,11 +286,21 @@ public class GameManager : MonoBehaviour
             return s;
     }
 
+    public void PlayerDefeated(GameObject player)
+    {
+        if (playerM.PlayerDefeated(player))
+        {
+            LoseGame();
+        }
+    }
+
     public void LoseGame()
     {
         currentSpeed = 1f;
         Time.timeScale = currentSpeed;
         music.pitch = currentSpeed;
+
+        //playerM.Lose();
 
         retryMenu.SetActive(true);
     }

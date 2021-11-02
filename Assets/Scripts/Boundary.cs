@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boundary : MonoBehaviour
 {
-    [SerializeField] private bool killCoin;
+    [SerializeField] private bool trueKill;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +21,9 @@ public class Boundary : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            collision.GetComponent<FishBirdController>().LoseGame();
+            collision.GetComponent<FishBirdController>().Defeat(trueKill);
         }
-        else if (collision.transform.tag == "Coin" && killCoin)
+        else if (collision.transform.tag == "Coin" && trueKill)
         {
             collision.gameObject.SetActive(false);
         }

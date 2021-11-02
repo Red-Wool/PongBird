@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(GameManager))]
+[RequireComponent(typeof(GameManager), typeof(PlayerManager))]
 public class ModifierSetup : MonoBehaviour
 {
-    private GameManager gm;
+    private GameManager gameM;
+    private PlayerManager playerM;
 
-    [Header("Player Info"), SerializeField, Space(10)] private FishBirdController player;
+    [Header("Player Info"), Space(10)]
+    private FishBirdController playerOne;
+    private FishBirdController playerTwo;
 
-    [Header("Paddle Info"), SerializeField, Space(10)] private GameObject leftPaddle;
+    [Header("Paddle Info"), Space(10), 
+     SerializeField] private GameObject leftPaddle;
     [SerializeField] private GameObject rightPaddle;
     [SerializeField] private GameObject paddleBoundery;
 
@@ -23,7 +27,12 @@ public class ModifierSetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = GetComponent<GameManager>();
+        gameM = GetComponent<GameManager>();
+        playerM = GetComponent<PlayerManager>();
+
+        playerOne = playerM.GetPlayer(true).GetComponent<FishBirdController>();
+        playerTwo = playerM.GetPlayer(false).GetComponent<FishBirdController>();
+
     }
 
     // Update is called once per frame
@@ -31,15 +40,36 @@ public class ModifierSetup : MonoBehaviour
     {
         if (escortAlive && !escortDrill.activeSelf)
         {
-            gm.player.LoseGame();
+            gameM.LoseGame();
         }
+    }
+
+    private void GetPlayers()
+    {
+        playerM = GetComponent<PlayerManager>();
+
+        playerOne = playerM.GetPlayer(true).GetComponent<FishBirdController>();
+        playerTwo = playerM.GetPlayer(false).GetComponent<FishBirdController>();
     }
 
     public void SetUp()
     {
         //SetUp Player
-        player.Reset();
-        player.bounceVal = (InventoryManager.instance.CheckItemValid("HighJump")) ? 15f : 10f; //High Jump
+        GetPlayers();
+
+        playerOne.Reset();
+        playerTwo.Reset();
+        if (InventoryManager.instance.CheckItemValid("HighJump"))
+        {
+            playerOne.bounceVal = 15f;
+            playerTwo.bounceVal = 15f;
+        }
+        else
+        {
+            playerOne.bounceVal = 10f;
+            playerTwo.bounceVal = 10f;
+        }
+        playerOne.bounceVal = (InventoryManager.instance.CheckItemValid("HighJump")) ? 15f : 10f; //High Jump
 
         //Check Drill Escort
         if (InventoryManager.instance.CheckItemValid("DrillEscort"))
