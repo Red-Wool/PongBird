@@ -124,7 +124,7 @@ public class StageHazardSpawn : MonoBehaviour
         if (!InventoryManager.instance.CheckItemValid("PipeDream"))
         {
             int num = (int)Mathf.Clamp(Mathf.Round(Random.Range(0f, (score == 0) ? -10 : 
-                score * ((InventoryManager.instance.CheckItemValid("ThrillTime")) ? 1f : 0.1f) + 1.5f)) - CalculateBoolArray(pipeEnabled) * 0.8f, 0f, 10f);
+                score * ((InventoryManager.instance.CheckItemValid("ThrillTime")) ? 1f : 0.1f) + 1.5f)) - CalculateBoolArray(pipeEnabled) * 0.8f, 0f, 10f * (coop ? 0.6f : 1f));
 
             //Setup Rockets
             rocketTimer = 0f;
@@ -137,7 +137,7 @@ public class StageHazardSpawn : MonoBehaviour
         }
 
         //Setup GoldUFO
-        if (score % 6 == 0 || Random.Range(0f, 1f) < 0.1f)
+        if (score % 6 == 3 || Random.Range(0f, 1f) < 0.1f)
         {
             ActivateGoldUFO(Mathf.Clamp(score / (5 + score / 4), 1, 4));
         }

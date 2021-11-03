@@ -71,7 +71,6 @@ public class GoldUFO : MonoBehaviour
 
     public void StartSpawn(int score)
     {
-        Debug.Log("On the move!");
         direction = !direction;
 
         moveTimer = direction ? 0f : 1f;

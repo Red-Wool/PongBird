@@ -137,7 +137,9 @@ public class GameManager : MonoBehaviour
 
         UpdateScore(0);
 
-        stageHs.StageHazardSetUp(0, true);
+        stageHs.coop = playerM.PlayingCoop;
+
+        //stageHs.StageHazardSetUp(0, true);
 
         music.Play();
     }

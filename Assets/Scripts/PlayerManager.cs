@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -12,6 +14,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private GameObject coopPlayerTwo;
 
+    [SerializeField]
+    private Toggle coopToggle;
+
+    [SerializeField] 
+    private GameObject respawnObject;
+    private TextMeshProUGUI respawnTimerText;
+
     private float respawnTimer = 0f;
 
     private GameManager gm;
@@ -20,6 +29,8 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         playingCoop = false;
+
+        respawnTimerText = respawnObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -28,6 +39,8 @@ public class PlayerManager : MonoBehaviour
         if (respawnTimer > 0)
         {
             respawnTimer -= Time.deltaTime;
+
+            respawnTimerText.text = respawnTimer.ToString((respawnTimer < 10) ? "0.0" : "#0");
 
             if (respawnTimer <= 0)
             {
@@ -55,6 +68,7 @@ public class PlayerManager : MonoBehaviour
     {
         GameObject player = deadPlayer ? coopPlayerTwo : coopPlayerOne;
         player.GetComponent<FishBirdController>().Reset();
+        respawnObject.SetActive(false);
     }
 
     public bool PlayerDefeated(GameObject player)
@@ -66,7 +80,8 @@ public class PlayerManager : MonoBehaviour
             return true;
         }
 
-        respawnTimer = 15f;
+        respawnTimer = 30f;
+        respawnObject.SetActive(true);
         deadPlayer = player == coopPlayerTwo;
 
         return false;
@@ -74,7 +89,15 @@ public class PlayerManager : MonoBehaviour
 
     public void Lose()
     {
+        respawnTimer = 0f;
+        respawnObject.SetActive(false);
+
         coopPlayerOne.GetComponent<FishBirdController>().DisablePlayer();
         coopPlayerTwo.GetComponent<FishBirdController>().DisablePlayer();
+    }
+
+    public void CoopToggle()
+    {
+        playingCoop = coopToggle.isOn;
     }
 }

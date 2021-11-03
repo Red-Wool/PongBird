@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PaddleBounce : MonoBehaviour
 {
-    [Header("Drill Info"), Space(10),
-    SerializeField] private KeyCode key; 
+    [Header("Paddle Info"), Space(10),
+     SerializeField] private KeyCode key; 
     [SerializeField] private float bounceVal;
+
+    [SerializeField] private bool isLeft;
 
     [Header("Reference"), SerializeField, Space(10)] private GameManager gm;
 
@@ -15,6 +17,8 @@ public class PaddleBounce : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        SetControl();
     }
 
     // Update is called once per frame
@@ -38,5 +42,12 @@ public class PaddleBounce : MonoBehaviour
     public void SetBounceVal(float val)
     {
         bounceVal = val;
+
+        SetControl();
+    }
+
+    private void SetControl()
+    {
+        key = isLeft ? ControlManager.instance.CurrentLeftPaddle : ControlManager.instance.CurrentRightPaddle;
     }
 }

@@ -36,7 +36,7 @@ public class ModifierSetup : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (escortAlive && !escortDrill.activeSelf)
         {
@@ -48,8 +48,12 @@ public class ModifierSetup : MonoBehaviour
     {
         playerM = GetComponent<PlayerManager>();
 
+        ControlManager.instance.playingCoop = playerM.PlayingCoop;
+
         playerOne = playerM.GetPlayer(true).GetComponent<FishBirdController>();
+
         playerTwo = playerM.GetPlayer(false).GetComponent<FishBirdController>();
+        playerTwo.gameObject.SetActive(playerM.PlayingCoop);
     }
 
     public void SetUp()

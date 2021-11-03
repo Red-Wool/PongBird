@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishBirdController : MonoBehaviour
 {
-    public KeyCode key;
+    public KeyCode savedKey;
 
     public float bounceVal;
     public float speed;
@@ -13,6 +13,8 @@ public class FishBirdController : MonoBehaviour
     public GameManager gm;
 
     private Vector3 beginPos;
+
+    [SerializeField] private bool playerTwo;
 
     private bool isInvinicible;
     private GameObject lastPaddleHit;
@@ -43,6 +45,8 @@ public class FishBirdController : MonoBehaviour
 
         pm = PlayerMode.Flapper;
 
+        SetControl();
+
         dead = false;
     }
 
@@ -54,7 +58,7 @@ public class FishBirdController : MonoBehaviour
             pos = rb.velocity;
             pos.x = speed * (posDirection ? 1 : -1);
 
-            if (Input.GetKeyDown(key))
+            if (Input.GetKeyDown(savedKey))
             {
                 switch (pm)
                 {
@@ -121,6 +125,15 @@ public class FishBirdController : MonoBehaviour
 
     public void Reset()
     {
+        //If Rigidbody is missing, assume all other references are missing just to be safe
+        if (!rb)
+        {
+            rb = GetComponent<Rigidbody2D>();
+            sr = GetComponent<SpriteRenderer>();
+        }
+
+        SetControl();
+
         dead = false;
         rb.velocity = Vector2.zero;
         rb.freezeRotation = true;
@@ -171,6 +184,11 @@ public class FishBirdController : MonoBehaviour
         tempPos /= tempPos.magnitude;
 
         return tempPos;
+    }
+
+    private void SetControl()
+    {
+        savedKey = playerTwo ? ControlManager.instance.CurrentPlayerTwoAction : ControlManager.instance.CurrentPlayerOneAction;
     }
 
     public void DisablePlayer()
