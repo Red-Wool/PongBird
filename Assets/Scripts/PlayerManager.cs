@@ -38,7 +38,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (respawnTimer > 0)
         {
-            respawnTimer -= Time.deltaTime;
+            respawnTimer -= Time.deltaTime / Time.timeScale;
 
             respawnTimerText.text = respawnTimer.ToString((respawnTimer < 10) ? "0.0" : "#0");
 
@@ -68,6 +68,7 @@ public class PlayerManager : MonoBehaviour
     {
         GameObject player = deadPlayer ? coopPlayerTwo : coopPlayerOne;
         player.GetComponent<FishBirdController>().Reset();
+        player.GetComponent<FishBirdController>().SetInvincible(3f);
         respawnObject.SetActive(false);
     }
 

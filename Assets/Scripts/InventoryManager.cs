@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
 
     public TextMeshProUGUI coinText;
 
+    [SerializeField] private ShopItem[] shopData;
+
     private string[] names = { "HighJump", "PaddleBoost", "SuperFast", "ThrillTime", "InfipaddleBounds", "DrillEscort", "PipeDream", "DrillMode"};
 
     private List<ItemToggle> inventory;

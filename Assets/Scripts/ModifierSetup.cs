@@ -41,6 +41,7 @@ public class ModifierSetup : MonoBehaviour
         if (escortAlive && !escortDrill.activeSelf)
         {
             gameM.LoseGame();
+            //playerM.Lose();
         }
     }
 

@@ -302,7 +302,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = currentSpeed;
         music.pitch = currentSpeed;
 
-        //playerM.Lose();
+        playerM.Lose();
 
         retryMenu.SetActive(true);
     }

@@ -14,11 +14,12 @@ public enum PlayerMode
     UFO
 }
 
+[System.Serializable]
 public struct ShopItem
 {
-    public string Name { get; }
-    public string Desc { get; }
-    public int Price { get; }
+    [SerializeField] private string name; public string Name { get { return name; } }
+    [SerializeField] private string desc; public string Desc { get { return desc; } }
+    [SerializeField] private int price; public int Price { get { return price; } }
 }
 
 [System.Serializable]

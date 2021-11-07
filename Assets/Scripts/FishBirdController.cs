@@ -121,6 +121,10 @@ public class FishBirdController : MonoBehaviour
             gm.GetCoin(1);
             collision.gameObject.SetActive(false);
         }
+        else if ((isInvinicible || isInvinicible) && collision.transform.tag == "Net")
+        {
+            rb.velocity = rb.velocity * (Vector3.one + Vector3.down * 2);
+        }
     }
 
     public void Reset()
@@ -153,14 +157,27 @@ public class FishBirdController : MonoBehaviour
     public void SetInvincible(float time)
     {
         isInvinicible = true;
+        rb.velocity = Vector3.up * 7f;
+
+        SetAlpha(0.8f);
+
         StartCoroutine("InvincibleCountdown", time);
     }
 
-    private IEnumerable InvincibleCountdown(float time)
+    private IEnumerator InvincibleCountdown(float time)
     {
+        Debug.Log(time / Time.timeScale);
+
         yield return new WaitForSeconds(time);
 
+        SetAlpha(1f);
         isInvinicible = false;
+    }
+
+    private void SetAlpha(float alphaVal)
+    {
+        Color col = new Color(1f, 1f, 1f, alphaVal);
+        sr.color = col;
     }
 
     public void Defeat(bool trueKill)

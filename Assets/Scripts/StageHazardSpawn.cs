@@ -55,7 +55,8 @@ public class StageHazardSpawn : MonoBehaviour
     void Update()
     {
         //Need to optimize these pipe things
-        pipeTimer += Time.deltaTime * (coop ? 0.2f : 3f);
+        //pipeTimer = Time.deltaTime * (coop ? 0.2f : 3f);
+        pipeTimer = Time.deltaTime * (coop ? 0.8f : 12f);
         for (int i = 0; i < pipeObjects.Length; i++)
         {
             //Lerp to position randomly selected before
@@ -70,14 +71,18 @@ public class StageHazardSpawn : MonoBehaviour
             //Stuff to change pipe if on or off
             tempPos = pipeObjects[i].transform.localScale;
 
-            if (pipeEnabled[i])
+            //Debug.Log(tempPos.y + " " + Time.deltaTime * (coop ? 0.8f : 12f) * (pipeEnabled[i] ? -1 : 1));
+            tempPos.y = Mathf.Clamp(tempPos.y + (pipeTimer * (pipeEnabled[i] ? -1f : 1f)), 1f, 5f);
+            //tempPos.y = pipeSize.Evaluate(tempPos.y - 1);
+
+            /*if (pipeEnabled[i])
             {
-                tempPos.y = pipeSize.Evaluate(1f - pipeTimer);
+                tempPos.y = pipeSize.Evaluate(pipeEnabled[i] ? 1f - pipeTimer : pipeTimer);
             }
             else
             {
                 tempPos.y = pipeSize.Evaluate(pipeTimer);
-            }
+            } */
             pipeObjects[i].transform.localScale = tempPos;
 
         }
