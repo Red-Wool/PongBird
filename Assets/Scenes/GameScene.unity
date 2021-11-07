@@ -628,7 +628,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<color=#007CE7>Infipaddle Bounds</color>
 
-    Know no limits'
+    A mysterious UFO
+
+    from a distant land...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: add9c6e04bd57c94c93fbf9354f04117, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: dbf1e7e000ec7e44389484bf5614adf1, type: 2}
@@ -697,12 +699,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 51834828}
-    characterCount: 32
+    characterCount: 57
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 8
+    wordCount: 9
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1767,7 +1769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &262217029
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1785,10 +1787,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 380, y: -85}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &262217030
 MonoBehaviour:
@@ -1802,7 +1804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1139703864}
+  button: {fileID: 0}
   value: 100
   index: ThrillTime
 --- !u!114 &262217031
@@ -2204,7 +2206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &313538767
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2222,10 +2224,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -25}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &313538768
 MonoBehaviour:
@@ -2272,7 +2274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 589986440}
+  button: {fileID: 0}
   value: 20
   index: HighJump
 --- !u!1 &320526035
@@ -3340,7 +3342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &477453643
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3358,10 +3360,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -145}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477453644
 MonoBehaviour:
@@ -3375,7 +3377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1330579405}
+  button: {fileID: 0}
   value: 100
   index: InfipaddleBounds
 --- !u!114 &477453645
@@ -14286,7 +14288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &714383036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14304,10 +14306,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -85}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &714383037
 MonoBehaviour:
@@ -14354,7 +14356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 978860557}
+  button: {fileID: 0}
   value: 50
   index: SuperFast
 --- !u!1 &720607404
@@ -15551,7 +15553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &831484912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15569,10 +15571,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -205}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &831484913
 MonoBehaviour:
@@ -15586,7 +15588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1042682093}
+  button: {fileID: 0}
   value: 40
   index: PipeDream
 --- !u!114 &831484914
@@ -18031,7 +18033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1131735790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18049,10 +18051,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 380, y: -145}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1131735791
 MonoBehaviour:
@@ -18066,7 +18068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 362709750}
+  button: {fileID: 0}
   value: 100
   index: DrillEscort
 --- !u!114 &1131735792
@@ -20169,7 +20171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1526736368
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20187,10 +20189,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 380, y: -205}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1526736369
 MonoBehaviour:
@@ -20237,7 +20239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 2059317717}
+  button: {fileID: 0}
   value: 100
   index: DrillMode
 --- !u!1 &1549140223
@@ -30557,37 +30559,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 1915194856}
-  shopData:
-  - name: HighJump
-    desc: 
-    price: 0
-  - name: PaddleBoost
-    desc: 
-    price: 0
-  - name: SuperFast
-    desc: 
-    price: 0
-  - name: ThrillTime
-    desc: 
-    price: 0
-  - name: InfipaddleBounds
-    desc: 
-    price: 0
-  - name: DrillEscort
-    desc: 
-    price: 0
-  - name: PipeDream
-    desc: 
-    price: 0
-  - name: DrillMode
-    desc: 
-    price: 0
-  - name: SafetyNet
-    desc: 
-    price: 0
-  - name: Hearty
-    desc: 
-    price: 0
+  shop: {fileID: 11400000, guid: da397c7792d380b4c8c40bf1e5fc6d42, type: 2}
+  shopDisplayPrefab: {fileID: 8992499378175119232, guid: 01bf0655695fc744caa44b227c213ff8,
+    type: 3}
+  shopParent: {fileID: 495565932}
 --- !u!114 &1639925792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30826,7 +30801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1716129834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30844,10 +30819,10 @@ RectTransform:
   m_Father: {fileID: 495565932}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 380, y: -25}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1716129835
 MonoBehaviour:
@@ -30861,7 +30836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 749010286}
+  button: {fileID: 0}
   value: 30
   index: PaddleBoost
 --- !u!114 &1716129836

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopButton : MonoBehaviour
 {
-    public GameObject button;
+    public Button button;
 
+    [SerializeField]
     private Toggle toggleButton;
 
     [SerializeField]
@@ -17,14 +19,28 @@ public class ShopButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        toggleButton = this.gameObject.GetComponentInChildren<Toggle>(true);
-        toggleButton.onValueChanged.AddListener(delegate {Toggle();});
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetUp(string ind, string info, int price)
+    {
+        index = ind;
+
+        button = gameObject.GetComponentInChildren<Button>(true);
+
+        toggleButton = gameObject.GetComponentInChildren<Toggle>(true);
+        toggleButton.onValueChanged.AddListener(delegate { Toggle(); });
+
+        transform.Find("DescText").GetComponent<TextMeshProUGUI>().text = info;
+
+        transform.Find("BuyButton").Find("PriceDisplay").GetComponent<TextMeshProUGUI>().text = price.ToString();
+        value = price;
     }
 
     public void Buy()
@@ -36,7 +52,7 @@ public class ShopButton : MonoBehaviour
             toggleButton.gameObject.SetActive(true);
             Toggle();
 
-            button.SetActive(false);
+            button.gameObject.SetActive(false);
         }
     }
 

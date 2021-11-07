@@ -17,8 +17,17 @@ public enum PlayerMode
 [System.Serializable]
 public struct ShopItem
 {
-    [SerializeField] private string name; public string Name { get { return name; } }
-    [SerializeField] private string desc; public string Desc { get { return desc; } }
+    private static string HexConverter(Color c)
+    {
+        return "#" + ((int)(c.r * 256) - 1).ToString("X2") + ((int)(c.g * 256) - 1).ToString("X2") + ((int)(c.b * 256) - 1).ToString("X2");
+    }
+    [SerializeField] private string tag; public string Tag { get { return tag; } }
+
+    [SerializeField] private string name; 
+    [SerializeField] private Color color;
+    [SerializeField] private string desc; 
+    public string Info 
+    { get { return "<color=" + HexConverter(color) + ">" + name + "</color>\n" + desc; } } //HexConverter(color)
     [SerializeField] private int price; public int Price { get { return price; } }
 }
 

@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8992499377707245604}
   - component: {fileID: 8992499377707245607}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DescText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231e32f8a12cf8948ab6d297883c249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 8992499378972708294}
+  button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 0
   index: PlaceHolder
 --- !u!1 &8992499378597511418
@@ -520,7 +521,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8992499378672911211}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -665,7 +666,7 @@ GameObject:
   - component: {fileID: 8992499378972708293}
   - component: {fileID: 8992499378972708292}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BuyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

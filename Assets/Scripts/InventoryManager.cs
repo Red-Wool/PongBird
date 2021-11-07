@@ -11,7 +11,9 @@ public class InventoryManager : MonoBehaviour
 
     public TextMeshProUGUI coinText;
 
-    [SerializeField] private ShopItem[] shopData;
+    [SerializeField] private ShopItemCollection shop;
+    [SerializeField] private GameObject shopDisplayPrefab;
+    [SerializeField] private Transform shopParent;
 
     private string[] names = { "HighJump", "PaddleBoost", "SuperFast", "ThrillTime", "InfipaddleBounds", "DrillEscort", "PipeDream", "DrillMode"};
 
@@ -31,9 +33,14 @@ public class InventoryManager : MonoBehaviour
 
         inventory = new List<ItemToggle>();
 
-        for(int i = 0; i < names.Length; i++)
+        for(int i = 0; i < shop.shopData.Length; i++)
         {
-            inventory.Add(new ItemToggle(names[i], false));
+            GameObject display = Instantiate(shopDisplayPrefab, shopParent);
+            ShopItem tempItem = shop.shopData[i];
+
+            display.GetComponent<ShopButton>().SetUp(tempItem.Tag, tempItem.Info, tempItem.Price);
+
+            inventory.Add(new ItemToggle(tempItem.Tag, false));
         }
 
         coins = 999;
@@ -61,24 +68,9 @@ public class InventoryManager : MonoBehaviour
         coinText.text = "Coins: " + coins;
     }
 
-    public void BuyItem(int value, int index)
-    {
-        coins -= value;
-        shopItems[index] = true;
-
-        coinText.text = "Coins: " + coins;
-    }
-    public void ToggleItem(bool value, int index)
-    {
-        shopToggle[index] = value;
-    }
-    public bool CheckItemValid(int index)
-    {
-        return shopItems[index] && shopToggle[index];
-    }
     public int ShopLength()
     {
-        return shopItems.Length;
+        return inventory.Count;
     }
 
     public void BuyItem(int value, string index)
