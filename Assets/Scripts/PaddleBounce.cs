@@ -13,6 +13,10 @@ public class PaddleBounce : MonoBehaviour
     [Header("Reference"), SerializeField, Space(10)] private GameManager gm;
 
     private Rigidbody2D rb;
+
+    private const float HITBOXSIZE = 3.6f;
+    private const float GRAPHICSIZE = 3.2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +43,17 @@ public class PaddleBounce : MonoBehaviour
         }
     }
     
+    public void SetPaddleSize(float mult)
+    {
+        //X and Y are switched because of rotation
+        Vector2 tempSize = Vector2.one * GRAPHICSIZE;
+        tempSize.x = GRAPHICSIZE * mult;
+        GetComponent<SpriteRenderer>().size = tempSize;
+
+        tempSize = new Vector2(HITBOXSIZE * mult, 0.6f); 
+        GetComponent<BoxCollider2D>().size = tempSize;
+    }
+
     public void SetBounceVal(float val)
     {
         bounceVal = val;

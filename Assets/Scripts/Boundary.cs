@@ -21,7 +21,7 @@ public class Boundary : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            collision.GetComponent<FishBirdController>().Defeat(trueKill);
+            collision.GetComponent<FishBirdController>().Damage(trueKill);
         }
         else if (collision.transform.tag == "Coin" && trueKill)
         {

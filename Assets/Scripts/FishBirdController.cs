@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FishBirdController : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class FishBirdController : MonoBehaviour
     private Vector3 beginPos;
 
     [SerializeField] private bool playerTwo;
+
+    private int hp;
+    [SerializeField] private Image hpBar;
+
+    private bool isSnake;
+    [HideInInspector] public bool isNet;
 
     private bool isInvinicible;
     private GameObject lastPaddleHit;
@@ -48,6 +55,14 @@ public class FishBirdController : MonoBehaviour
         SetControl();
 
         dead = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (hpBar.gameObject.activeSelf)
+        {
+            hpBar.fillAmount = hp / 4f;
+        }
     }
 
     // Update is called once per frame
@@ -121,7 +136,7 @@ public class FishBirdController : MonoBehaviour
             gm.GetCoin(1);
             collision.gameObject.SetActive(false);
         }
-        else if ((isInvinicible || isInvinicible) && collision.transform.tag == "Net")
+        else if ((isNet || isInvinicible) && collision.transform.tag == "Net")
         {
             rb.velocity = rb.velocity * (Vector3.one + Vector3.down * 2);
         }
@@ -137,6 +152,11 @@ public class FishBirdController : MonoBehaviour
         }
 
         SetControl();
+
+        if (hp <= 0)
+        {
+            hp = 1;
+        }
 
         dead = false;
         rb.velocity = Vector2.zero;
@@ -166,7 +186,7 @@ public class FishBirdController : MonoBehaviour
 
     private IEnumerator InvincibleCountdown(float time)
     {
-        Debug.Log(time / Time.timeScale);
+        //Debug.Log(time / Time.timeScale);
 
         yield return new WaitForSeconds(time);
 
@@ -180,16 +200,34 @@ public class FishBirdController : MonoBehaviour
         sr.color = col;
     }
 
-    public void Defeat(bool trueKill)
+    public void SetUpHP(bool flag)
     {
-        if (trueKill || !isInvinicible)
+        hpBar.gameObject.SetActive(flag);
+        hp = flag ? 4 : 1;
+    }
+
+    public void Damage(bool trueKill)
+    {
+        //hp -= 1;
+        if (!isInvinicible)
+        {
+            hp -= 1;
+        }
+
+        if (trueKill || hp <= 0)
         {
             DisablePlayer();
 
             gm.PlayerDefeated(this.gameObject);
+
+            Debug.Log("Dead");
+            return;
         }
-        Debug.Log("Dead");
-        
+
+        if (!isInvinicible)
+        {
+            SetInvincible(3f);
+        }
     }
 
     public Vector3 GetDirection(Vector3 otherPos)
@@ -212,6 +250,8 @@ public class FishBirdController : MonoBehaviour
     {
         rb.freezeRotation = false;
         rb.angularVelocity = 999f;
+
+        hp = 0;
 
         GetComponent<BoxCollider2D>().enabled = false;
 

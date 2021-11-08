@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
         {
             respawnTimer -= Time.deltaTime / Time.timeScale;
 
-            respawnTimerText.text = respawnTimer.ToString((respawnTimer < 10) ? "0.0" : "#0");
+            respawnTimerText.text = respawnTimer.ToString((respawnTimer < 10f) ? "0.0" : "#0");
 
             if (respawnTimer <= 0)
             {
@@ -81,7 +81,7 @@ public class PlayerManager : MonoBehaviour
             return true;
         }
 
-        respawnTimer = 30f;
+        respawnTimer = 25f;
         respawnObject.SetActive(true);
         deadPlayer = player == coopPlayerTwo;
 

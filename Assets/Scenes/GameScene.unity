@@ -1394,7 +1394,7 @@ RectTransform:
   m_Children:
   - {fileID: 753594938}
   m_Father: {fileID: 1112632266}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1805,6 +1805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 100
   index: ThrillTime
 --- !u!114 &262217031
@@ -2275,6 +2276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 20
   index: HighJump
 --- !u!1 &320526035
@@ -2842,6 +2844,8 @@ MonoBehaviour:
   dead: 0
   gm: {fileID: 1639925787}
   playerTwo: 0
+  hpBar: {fileID: 1005599738}
+  isNet: 0
   flapPS: {fileID: 698849897}
 --- !u!61 &374685708
 BoxCollider2D:
@@ -3378,6 +3382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 100
   index: InfipaddleBounds
 --- !u!114 &477453645
@@ -3448,12 +3453,12 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.29999998, y: 0, z: 0.19999999, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.2, y: 3.2}
     newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
@@ -3501,7 +3506,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -3601,7 +3606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: -40}
+  m_AnchoredPosition: {x: 5, y: -0.000450614}
   m_SizeDelta: {x: 500, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495565933
@@ -14357,6 +14362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 50
   index: SuperFast
 --- !u!1 &720607404
@@ -14830,7 +14836,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -1528581941426886678, guid: 850197bee4aebbe429e5ed2900b4bc94,
+  m_Sprite: {fileID: -2766811678988084853, guid: 238a1026acbaf57498682836e3b76d78,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -14860,6 +14866,8 @@ MonoBehaviour:
   dead: 0
   gm: {fileID: 1639925787}
   playerTwo: 1
+  hpBar: {fileID: 1005599738}
+  isNet: 0
   flapPS: {fileID: 1596444898}
 --- !u!1 &799370574
 GameObject:
@@ -15210,12 +15218,12 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.29999998, y: 0, z: 0.19999999, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.2, y: 3.2}
     newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
@@ -15263,7 +15271,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -15589,6 +15597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 40
   index: PipeDream
 --- !u!114 &831484914
@@ -16943,6 +16952,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978860557}
   m_CullTransparentMesh: 0
+--- !u!1 &1005599736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1005599737}
+  - component: {fileID: 1005599739}
+  - component: {fileID: 1005599738}
+  m_Layer: 5
+  m_Name: HPBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1005599737
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005599736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1112632266}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -70, y: -70}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1005599738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005599736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9058824, g: 0.9803922, b: 0.20392159, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c20aacd9f433df3478495fe9603bf576, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 0
+  m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1005599739
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005599736}
+  m_CullTransparentMesh: 0
 --- !u!1 &1019281041
 GameObject:
   m_ObjectHideFlags: 0
@@ -17510,7 +17592,7 @@ RectTransform:
   - {fileID: 720607405}
   - {fileID: 799370575}
   m_Father: {fileID: 1112632266}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17814,6 +17896,7 @@ RectTransform:
   m_Children:
   - {fileID: 1364041692}
   - {fileID: 1915194855}
+  - {fileID: 1005599737}
   - {fileID: 1988414449}
   - {fileID: 235576606}
   - {fileID: 1065533350}
@@ -18069,6 +18152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 100
   index: DrillEscort
 --- !u!114 &1131735792
@@ -20240,6 +20324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 100
   index: DrillMode
 --- !u!1 &1549140223
@@ -20402,7 +20487,7 @@ RectTransform:
   - {fileID: 1146562758}
   - {fileID: 62539885}
   m_Father: {fileID: 1112632266}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30588,8 +30673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa6c6dca9173b243a9acd792ce5afa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftPaddle: {fileID: 488892650}
-  rightPaddle: {fileID: 814549432}
+  leftPaddle: {fileID: 488892655}
+  rightPaddle: {fileID: 814549437}
   paddleBoundery: {fileID: 320526035}
   escortDrill: {fileID: 1803006319}
 --- !u!114 &1639925794
@@ -30837,6 +30922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  toggleButton: {fileID: 0}
   value: 30
   index: PaddleBoost
 --- !u!114 &1716129836
@@ -31914,7 +32000,7 @@ RectTransform:
   m_Children:
   - {fileID: 2130104138}
   m_Father: {fileID: 1112632266}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32735,7 +32821,7 @@ RectTransform:
   m_Children:
   - {fileID: 1768117637}
   m_Father: {fileID: 1112632266}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -32887,7 +32973,7 @@ RectTransform:
   - {fileID: 1437330096}
   - {fileID: 893886057}
   m_Father: {fileID: 1112632266}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

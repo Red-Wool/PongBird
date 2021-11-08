@@ -13,8 +13,8 @@ public class ModifierSetup : MonoBehaviour
     private FishBirdController playerTwo;
 
     [Header("Paddle Info"), Space(10), 
-     SerializeField] private GameObject leftPaddle;
-    [SerializeField] private GameObject rightPaddle;
+     SerializeField] private PaddleBounce leftPaddle;
+    [SerializeField] private PaddleBounce rightPaddle;
     [SerializeField] private GameObject paddleBoundery;
 
     private Vector3 posRef;
@@ -23,6 +23,8 @@ public class ModifierSetup : MonoBehaviour
 
     private bool escortAlive;
 
+    //Extra Varibles to only instatiate once
+    private bool tempBool;
 
     // Start is called before the first frame update
     void Start()
@@ -61,10 +63,10 @@ public class ModifierSetup : MonoBehaviour
     {
         //SetUp Player
         GetPlayers();
-
+        //ResetPlayers
         playerOne.Reset();
         playerTwo.Reset();
-        if (InventoryManager.instance.CheckItemValid("HighJump"))
+        if (InventoryManager.instance.CheckItemValid("HighJump")) //Check HighJump
         {
             playerOne.bounceVal = 15f;
             playerTwo.bounceVal = 15f;
@@ -74,7 +76,26 @@ public class ModifierSetup : MonoBehaviour
             playerOne.bounceVal = 10f;
             playerTwo.bounceVal = 10f;
         }
-        playerOne.bounceVal = (InventoryManager.instance.CheckItemValid("HighJump")) ? 15f : 10f; //High Jump
+
+        tempBool = InventoryManager.instance.CheckItemValid("SafetyNet"); //Check Safety Net
+        playerOne.isNet = tempBool;
+        playerTwo.isNet = tempBool;
+
+        tempBool = InventoryManager.instance.CheckItemValid("Hearty"); //Check Hearty
+        playerOne.SetUpHP(tempBool);
+        playerTwo.SetUpHP(tempBool);
+
+        if (InventoryManager.instance.CheckItemValid("TinyPaddle")) //Check Tiny Paddles
+        {
+            leftPaddle.SetPaddleSize(0.6f);
+            rightPaddle.SetPaddleSize(0.6f);
+        }
+        else
+        {
+            leftPaddle.SetPaddleSize(1f);
+            rightPaddle.SetPaddleSize(1f);
+        }
+        //playerOne.bounceVal = (InventoryManager.instance.CheckItemValid("HighJump")) ? 15f : 10f; //High Jump
 
         //Check Drill Escort
         if (InventoryManager.instance.CheckItemValid("DrillEscort"))
@@ -91,12 +112,20 @@ public class ModifierSetup : MonoBehaviour
         //Clamp paddles into bounds and check if Infipaddle Bounds, and sets Paddle Bounce
         leftPaddle.transform.position = ClampPaddle(leftPaddle.transform.position);
         leftPaddle.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        leftPaddle.GetComponent<PaddleBounce>().SetBounceVal(InventoryManager.instance.CheckItemValid("PaddleBoost") ? 15 : 10);
 
         rightPaddle.transform.position = ClampPaddle(rightPaddle.transform.position);
         rightPaddle.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        rightPaddle.GetComponent<PaddleBounce>().SetBounceVal(InventoryManager.instance.CheckItemValid("PaddleBoost") ? 15 : 10);
 
+        if (InventoryManager.instance.CheckItemValid("PaddleBoost")) //Check PaddleBoost
+        {
+            leftPaddle.SetBounceVal(15);
+            rightPaddle.SetBounceVal(15);
+        }
+        else
+        {
+            leftPaddle.SetBounceVal(10);
+            rightPaddle.SetBounceVal(10);
+        }
 
         paddleBoundery.SetActive(!InventoryManager.instance.CheckItemValid("InfipaddleBounds"));
     }

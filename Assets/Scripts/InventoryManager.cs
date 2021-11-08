@@ -15,12 +15,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject shopDisplayPrefab;
     [SerializeField] private Transform shopParent;
 
-    private string[] names = { "HighJump", "PaddleBoost", "SuperFast", "ThrillTime", "InfipaddleBounds", "DrillEscort", "PipeDream", "DrillMode"};
+    //private string[] names = { "HighJump", "PaddleBoost", "SuperFast", "ThrillTime", "InfipaddleBounds", "DrillEscort", "PipeDream", "DrillMode"};
 
     private List<ItemToggle> inventory;
-
-    private bool[] shopItems = new bool[8];
-    private bool[] shopToggle = new bool[8];
 
     //Extra Varibles to only instatiate once
     private int ind;
@@ -33,10 +30,12 @@ public class InventoryManager : MonoBehaviour
 
         inventory = new List<ItemToggle>();
 
-        for(int i = 0; i < shop.shopData.Length; i++)
+        for(int i = 0; i < shop.shopData.Length - 1; i++)
         {
-            GameObject display = Instantiate(shopDisplayPrefab, shopParent);
             ShopItem tempItem = shop.shopData[i];
+
+            GameObject display = Instantiate(shopDisplayPrefab, shopParent);
+            display.name = tempItem.Tag;
 
             display.GetComponent<ShopButton>().SetUp(tempItem.Tag, tempItem.Info, tempItem.Price);
 
