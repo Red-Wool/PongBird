@@ -27,20 +27,21 @@ public class FishBirdController : MonoBehaviour
     private GameObject lastPaddleHit;
 
     private Vector3 bounceDirection;
-    private float bounceEffectTimer;
+    [HideInInspector] public float bounceEffectTimer;
 
     bool posDirection = true;
 
-    Rigidbody2D rb;
+    Rigidbody2D rb; public Rigidbody2D GetRb() { return rb; }
     SpriteRenderer sr;
 
     public ParticleSystem flapPS;
 
-    private PlayerMode pm;
+    [SerializeField]
+    private PlayerMode playerMode;
 
     //public PlayerMode Mode { set { pm = value; } }
 
-    Vector3 pos;
+    public Vector3 pos;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +51,7 @@ public class FishBirdController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
-        pm = PlayerMode.Flapper;
+        //pm = PlayerMode.Flapper;
 
         SetControl();
 
@@ -73,7 +74,8 @@ public class FishBirdController : MonoBehaviour
             pos = rb.velocity;
             pos.x = speed * (posDirection ? 1 : -1);
 
-            if (Input.GetKeyDown(savedKey))
+            playerMode.Action(this);
+            /*if (Input.GetKeyDown(savedKey))
             {
                 switch (pm)
                 {
@@ -92,7 +94,7 @@ public class FishBirdController : MonoBehaviour
                 bounceEffectTimer *= 0.5f;
 
                 flapPS.Play();
-            }
+            }*/
 
             if (bounceEffectTimer > 0)
             {
