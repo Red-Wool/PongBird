@@ -39,6 +39,8 @@ public class FishBirdController : MonoBehaviour
     [SerializeField]
     private PlayerMode playerMode;
 
+    [HideInInspector] public float[] reserved;
+
     //public PlayerMode Mode { set { pm = value; } }
 
     public Vector3 pos;
@@ -246,6 +248,12 @@ public class FishBirdController : MonoBehaviour
     private void SetControl()
     {
         savedKey = playerTwo ? ControlManager.instance.CurrentPlayerTwoAction : ControlManager.instance.CurrentPlayerOneAction;
+        playerMode.Reset(this);
+    }
+
+    public void GravityScale(float power)
+    {
+        rb.gravityScale = 2f * power;
     }
 
     public void DisablePlayer()

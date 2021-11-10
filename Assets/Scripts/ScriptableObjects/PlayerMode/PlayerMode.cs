@@ -5,5 +5,5 @@ using UnityEngine;
 public abstract class PlayerMode : ScriptableObject
 {
     public abstract void Action(FishBirdController player);
-    public abstract void Reset();
+    public abstract void Reset(FishBirdController player);
 };

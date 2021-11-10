@@ -13,7 +13,8 @@ public class DrillMode : PlayerMode
     {
         if (Input.GetKeyDown(player.savedKey))
         {
-            player.flapPS.loop = true;
+            var main = player.flapPS.main;
+            main.loop = true;
             player.flapPS.Play();
         }
         else if (Input.GetKey(player.savedKey))
@@ -23,11 +24,12 @@ public class DrillMode : PlayerMode
             player.bounceEffectTimer *= 0.9f;
         }
         else if (Input.GetKeyUp(player.savedKey)){
-            player.flapPS.loop = false;
+            var main = player.flapPS.main;
+            main.loop = false;
         }
     }
-    public override void Reset()
+    public override void Reset(FishBirdController player)
     {
-        throw new System.NotImplementedException();
+        player.GravityScale(1);
     }
 }

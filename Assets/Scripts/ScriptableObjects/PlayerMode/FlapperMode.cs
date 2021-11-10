@@ -16,8 +16,8 @@ public class FlapperMode : PlayerMode
             player.flapPS.Play();
         }
     }
-    public override void Reset()
+    public override void Reset(FishBirdController player)
     {
-        throw new System.NotImplementedException();
+        player.GravityScale(1);
     }
 }

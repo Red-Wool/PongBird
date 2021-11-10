@@ -2849,7 +2849,8 @@ MonoBehaviour:
   isNet: 0
   bounceEffectTimer: 0
   flapPS: {fileID: 1057682297}
-  playerMode: {fileID: 11400000, guid: d026faec07a5a2e4aa3e155c5d2e6428, type: 2}
+  playerMode: {fileID: 11400000, guid: 5e63c83b7b7f1fa49b380b6588704cf6, type: 2}
+  reserved: []
   pos: {x: 0, y: 0, z: 0}
 --- !u!61 &374685708
 BoxCollider2D:
@@ -14875,6 +14876,7 @@ MonoBehaviour:
   bounceEffectTimer: 0
   flapPS: {fileID: 1596444898}
   playerMode: {fileID: 11400000, guid: 5e63c83b7b7f1fa49b380b6588704cf6, type: 2}
+  reserved: []
   pos: {x: 0, y: 0, z: 0}
 --- !u!1 &799370574
 GameObject:
@@ -17578,7 +17580,7 @@ GameObject:
   - component: {fileID: 1057682297}
   - component: {fileID: 1057682296}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: BlastPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
