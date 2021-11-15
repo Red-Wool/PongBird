@@ -100,5 +100,7 @@ public class PlayerManager : MonoBehaviour
     public void CoopToggle()
     {
         playingCoop = coopToggle.isOn;
+
+        ControlManager.instance.playingCoop = playingCoop;
     }
 }

@@ -6,15 +6,29 @@ public class SnakeManager : MonoBehaviour
 {
     public static SnakeManager instance;
 
-    private GameObject minePrefab;
-    private List<GameObject> minePool = new List<GameObject>();
+    public delegate void SendTime(float time);
+    public static event SendTime OnScoreChange;
 
-    private GameObject tempMine;
+    //private GameObject minePrefab;
+    [SerializeField] private PoolObject minePool;
+    [SerializeField] private PoolObject particlePool;
+
+    private float lifeTime;
+    public float LifeTime { get { return lifeTime; } }
+
+    private GameObject tempObj;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        minePool.AddPool(30);
+        particlePool.AddPool(4);
+
+        //OnScoreChange = 
+
+        //lifeTime = 5f;
     }
 
     // Update is called once per frame
@@ -23,35 +37,41 @@ public class SnakeManager : MonoBehaviour
         
     }
 
-    public GameObject MineAddPool(int count)
+    public void SetMine(Vector3 pos)
     {
-        GameObject mine = null;
-        for (int i = 0; i < count; i++)
-        {
-            mine = Instantiate(minePrefab, Vector3.zero, Quaternion.identity);
+        tempObj = minePool.GetObject();
 
-            mine.SetActive(false);
-
-            minePool.Add(mine);
-
-            //rocket = tempRocket;
-        }
-        return mine;
+        tempObj.GetComponent<SnakeMine>().SetUp(pos, lifeTime);
     }
 
-    public GameObject GetMine()
+    public void UpdateParticle(int score)
     {
-        for (int i = 0; i < minePool.Count; i++)
+        lifeTime = score * 0.05f + 3.5f;
+        OnScoreChange?.Invoke(lifeTime);
+    }
+
+    public void ResetMines()
+    {
+        minePool.DisableAll();
+    }
+
+    public void AttachPlayer(FishBirdController player, bool flag)
+    {
+        player.isSnake = flag;
+
+        Transform temp = player.transform.Find(particlePool.CloneName);
+
+        if (temp)
         {
-            if (!minePool[i].activeInHierarchy)
-            {
-                minePool[i].SetActive(true);
-
-                return minePool[i];
-            }
+            temp.gameObject.SetActive(flag);
         }
+        else if (flag)
+        {
+            tempObj = particlePool.GetObject();
+            tempObj.transform.SetParent(player.transform);
+            tempObj.transform.position = player.transform.position;
 
-        tempMine = MineAddPool(10);
-        return tempMine;
+        }
+        
     }
 }

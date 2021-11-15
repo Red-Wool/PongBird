@@ -20,7 +20,7 @@ public class FishBirdController : MonoBehaviour
     private int hp;
     [SerializeField] private Image hpBar;
 
-    private bool isSnake;
+    [HideInInspector] public bool isSnake;
     [HideInInspector] public bool isNet;
 
     private bool isInvinicible;
@@ -60,44 +60,38 @@ public class FishBirdController : MonoBehaviour
         dead = false;
     }
 
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         if (hpBar.gameObject.activeSelf)
         {
             hpBar.fillAmount = hp / 4f;
         }
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
     {
-        if (!dead)
+        if (hpBar.gameObject.activeSelf)
         {
+            hpBar.fillAmount = hp / 4f;
+        }
+
+        if (!dead) //Make Sure Not dead!
+        {
+            // Move in X Direction
             pos = rb.velocity;
             pos.x = speed * (posDirection ? 1 : -1);
 
+            //Get Player Action
             playerMode.Action(this);
-            /*if (Input.GetKeyDown(savedKey))
+
+            //Spawn Mine if playing Snaked
+            if (isSnake && Input.GetKeyDown(savedKey))
             {
-                switch (pm)
-                {
-                    case PlayerMode.Flapper:
+                SnakeManager.instance.SetMine(transform.position);
+            }
 
-                        break;
-                    case PlayerMode.Drill:
-
-                        break;
-                    case PlayerMode.UFO:
-
-                        break;
-                }
-                pos.y = bounceVal;
-
-                bounceEffectTimer *= 0.5f;
-
-                flapPS.Play();
-            }*/
-
+            //Player Collision Stuff
             if (bounceEffectTimer > 0)
             {
                 bounceEffectTimer -= Time.deltaTime * Time.timeScale * 2;
@@ -107,9 +101,9 @@ public class FishBirdController : MonoBehaviour
                 pos += bounceDirection * (16f * bounceEffectTimer);
             }
 
+            //Set Velocity
             rb.velocity = pos;
         }
-        //rb.AddForce(Vector2.right * speed * (posDirection ? 1 : -1));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

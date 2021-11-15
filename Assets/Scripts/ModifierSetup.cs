@@ -66,7 +66,9 @@ public class ModifierSetup : MonoBehaviour
         //ResetPlayers
         playerOne.Reset();
         playerTwo.Reset();
-        if (InventoryManager.instance.CheckItemValid("HighJump")) //Check HighJump
+
+        //Check HighJump
+        if (InventoryManager.instance.CheckItemValid("HighJump")) 
         {
             playerOne.bounceVal = 15f;
             playerTwo.bounceVal = 15f;
@@ -77,15 +79,26 @@ public class ModifierSetup : MonoBehaviour
             playerTwo.bounceVal = 10f;
         }
 
-        tempBool = InventoryManager.instance.CheckItemValid("SafetyNet"); //Check Safety Net
+        //Check Safety Net
+        tempBool = InventoryManager.instance.CheckItemValid("SafetyNet"); 
         playerOne.isNet = tempBool;
         playerTwo.isNet = tempBool;
 
-        tempBool = InventoryManager.instance.CheckItemValid("Hearty"); //Check Hearty
+        //Check Hearty
+        tempBool = InventoryManager.instance.CheckItemValid("Hearty"); 
         playerOne.SetUpHP(tempBool);
         playerTwo.SetUpHP(tempBool);
 
-        if (InventoryManager.instance.CheckItemValid("TinyPaddle")) //Check Tiny Paddles
+        //Check Snaked and reset as well
+        SnakeManager.instance.ResetMines();
+        SnakeManager.instance.UpdateParticle(0);
+
+        tempBool = InventoryManager.instance.CheckItemValid("Snaked");
+        SnakeManager.instance.AttachPlayer(playerOne, tempBool);
+        SnakeManager.instance.AttachPlayer(playerTwo, tempBool);
+
+        //Check Tiny Paddles
+        if (InventoryManager.instance.CheckItemValid("TinyPaddle")) 
         {
             leftPaddle.SetPaddleSize(0.6f);
             rightPaddle.SetPaddleSize(0.6f);
@@ -109,14 +122,15 @@ public class ModifierSetup : MonoBehaviour
             escortAlive = false;
         }
 
-        //Clamp paddles into bounds and check if Infipaddle Bounds, and sets Paddle Bounce
+        //Clamp paddles into bounds
         leftPaddle.transform.position = ClampPaddle(leftPaddle.transform.position);
         leftPaddle.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
         rightPaddle.transform.position = ClampPaddle(rightPaddle.transform.position);
         rightPaddle.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
-        if (InventoryManager.instance.CheckItemValid("PaddleBoost")) //Check PaddleBoost
+        //Check PaddleBoost
+        if (InventoryManager.instance.CheckItemValid("PaddleBoost")) 
         {
             leftPaddle.SetBounceVal(15);
             rightPaddle.SetBounceVal(15);
@@ -127,7 +141,17 @@ public class ModifierSetup : MonoBehaviour
             rightPaddle.SetBounceVal(10);
         }
 
+        //Check InfipaddleBounds
         paddleBoundery.SetActive(!InventoryManager.instance.CheckItemValid("InfipaddleBounds"));
+    }
+
+    public void ScoreChange(int score)
+    {
+        //Debug.Log(score);
+        if (InventoryManager.instance.CheckItemValid("Snaked"))
+        {
+            SnakeManager.instance.UpdateParticle(score);
+        }
     }
 
     public Vector3 ClampPaddle(Vector3 pos) 

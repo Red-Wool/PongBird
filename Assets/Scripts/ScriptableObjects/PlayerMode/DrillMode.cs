@@ -6,11 +6,15 @@ using UnityEngine;
 public class DrillMode : PlayerMode
 {
     //[]
+    public float speedMultiplier;
+
     public float speedIncrease;
     public float maxVelocity = 10f;
 
     public override void Action(FishBirdController player)
     {
+        player.pos.x *= speedMultiplier;
+
         if (Input.GetKeyDown(player.savedKey))
         {
             var main = player.flapPS.main;

@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
     {
         UpdateScore(1);
 
+        modSetup.ScoreChange(score);
+
         stageHs.StageHazardSetUp(score, direction);
 
         CalculateSpeed();
