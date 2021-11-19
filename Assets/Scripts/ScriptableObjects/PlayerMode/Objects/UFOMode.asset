@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UFOMode
   m_EditorClassIdentifier: 
   speedMultiplier: 1.4
-  accerleration: 2.6
+  accerleration: 2.65
   minMaxVelocity: {x: -15, y: 15}

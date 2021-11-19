@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a9ba0bd4978234d8270a07332e6cd2, type: 3}
   m_Name: DrillMode
   m_EditorClassIdentifier: 
-  speedMultiplier: 1.2
+  speedMultiplier: 1.1
   speedIncrease: 5
   maxVelocity: 10

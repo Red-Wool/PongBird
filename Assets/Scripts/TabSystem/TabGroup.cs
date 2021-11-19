@@ -30,11 +30,13 @@ public class TabGroup : MonoBehaviour
         }
 
         tabs.Add(button);
+
+        ResetTabs();
     }
 
     public void OnTabEnter(TabButton button)
     {
-        Debug.Log("Entered Prozimity!");
+        //Debug.Log("Entered Prozimity!");
 
         ResetTabs();
         button.MoveToward(selectDisplacement);
@@ -67,8 +69,13 @@ public class TabGroup : MonoBehaviour
     {
         if (selectedButton == null)
         {
-            Debug.LogError(name + " Tab Group does not have a Selected Button");
-            return;
+            if (primaryButton == null)
+            {
+                Debug.LogError(name + " Tab Group does not have a Selected Button");
+                return;
+            }
+
+            selectedButton = primaryButton;
         }
 
         selectedButton.MoveToward(selectDisplacement);
@@ -80,6 +87,11 @@ public class TabGroup : MonoBehaviour
                 button.background.color = idleColor;
                 button.MoveToward(Vector3.zero);
             }
+            else
+            {
+                button.background.color = selectColor;
+                button.MoveToward(selectDisplacement);
+            }
 
             if (changeContent)
             {
@@ -90,7 +102,15 @@ public class TabGroup : MonoBehaviour
 
     public void RestartTab()
     {
+        if (tabs == null)
+        {
+            tabs = new List<TabButton>();
+        }
+
         selectedButton = primaryButton;
+
+        selectedButton.MoveToward(selectDisplacement);
+
         ResetTabs();
     }
 }

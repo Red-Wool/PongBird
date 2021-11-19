@@ -69,7 +69,7 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void FixedUpdate()
     {
-        Debug.Log(rectTransform.position);
+        //Debug.Log(rectTransform.position);
         rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, goalPos, 0.1f);
         //transfo.position = Vector3.Lerp(transform.position, goalPos, 0.1f);
     }

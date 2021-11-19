@@ -17,6 +17,8 @@ public class UFOMode : PlayerMode
         player.pos.y = Mathf.Clamp(player.GetRb().velocity.y + (player.bounceVal * accerleration * player.reserved[0] * Time.deltaTime), minMaxVelocity.x, minMaxVelocity.y);
         if (Input.GetKeyDown(player.savedKey))
         {
+            player.flapPS.Play(true);
+
             player.reserved[0] *= -1;
         }
     }
