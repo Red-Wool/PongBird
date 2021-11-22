@@ -29,6 +29,14 @@ public struct ShopItem
     public string Info 
     { get { return "<color=" + HexConverter(color) + ">" + name + "</color>\n" + desc.Replace("\\n","\n"); } } //HexConverter(color)
     [SerializeField] private int price; public int Price { get { return price; } }
+    [SerializeField] private ShopItemType type; public ShopItemType Type { get { return type; } }
+}
+
+public enum ShopItemType
+{
+    Varient,
+    PlayerMode,
+    SkinQuestionMarkMaybeWaitNoWhyAreYouHere
 }
 
 [System.Serializable]

@@ -19,14 +19,12 @@ public class StageHazardSpawn : MonoBehaviour
 
     //Drill Varibles
     [Header("Drill Info"), Space(10),
-     SerializeField] private GameObject rocketPrefab;
+     SerializeField] private PoolObject rocketPool;
     [SerializeField] private ParticleSystem rocketPS;
 
     private float rocketTimer;
     private GameObject tempRocket;
-    private List<GameObject> rocketPool;
-    private Vector2[] rocketPositions;
-    private float[] rocketIntervals = { 999f, 999f, 999f, 999f, 999f, 999f, 999f, 999f, 999f, 999f};//10
+    private List<EnemySpawnInfo> rocketSpawnInfo;
 
     //GoldUFO Varibles
     [Header("GoldUFO Info"), Space(10),
@@ -42,13 +40,11 @@ public class StageHazardSpawn : MonoBehaviour
         pipeEnabled = new bool[pipeObjects.Length];
         target = new Vector2[pipeObjects.Length];
 
-        rocketPool = new List<GameObject>();
-        rocketPositions = new Vector2[10];
+        rocketSpawnInfo = new List<EnemySpawnInfo>();
 
-        RocketAddPool(10);
+        rocketPool.AddPool(10);
 
         StageHazardSetUp(0, true);
-        //StageHazardSetUp(0, true);
     }
 
     // Update is called once per frame
@@ -91,27 +87,29 @@ public class StageHazardSpawn : MonoBehaviour
         if (!InventoryManager.instance.CheckItemValid("PipeDream"))
         {
             //Manage Rockets
-            rocketTimer += Time.deltaTime * Time.timeScale;
+            rocketTimer = Time.deltaTime * Time.timeScale;
 
             //goes through rocket intervals
-            for (int i = 0; i < rocketIntervals.Length; i++)
+            for (int i = rocketSpawnInfo.Count - 1; i >= 0; i--)
             {
+                rocketSpawnInfo[i].TimePass(rocketTimer); 
+
                 //Send the warning before they come
-                if (rocketIntervals[i] - 2f < rocketTimer && Mathf.Abs(rocketPositions[i].x) == 14f)
+                if (rocketSpawnInfo[i].Time - 2f < rocketTimer && Mathf.Abs(rocketSpawnInfo[i].Position.x) == 14f)
                 {
                     //Debug.Log("ParticleActivate!");
-                    rocketPS.transform.position = rocketPositions[i];
+                    rocketPS.transform.position = rocketSpawnInfo[i].Position;
                     rocketPS.Play();
 
-                    rocketPositions[i].x = (rocketPositions[i].x == 14f) ? 19f : -19f;
+                    rocketSpawnInfo[i].SetX((rocketSpawnInfo[i].Position.x == 14f) ? 19f : -19f);
                 }
-                else if (rocketIntervals[i] < rocketTimer) // Launch Rocket when it is time
+                else if (rocketSpawnInfo[i].Time < 0) // Launch Rocket when it is time
                 {
-                    tempRocket = GetRocket();
-                    tempRocket.transform.position = rocketPositions[i];
-                    tempRocket.GetComponent<FlyingDrill>().SetUpRocket(rocketPositions[i].x == -19f);
+                    tempRocket = rocketPool.GetObject();
+                    tempRocket.transform.position = rocketSpawnInfo[i].Position;
+                    tempRocket.GetComponent<FlyingDrill>().SetUpRocket(rocketSpawnInfo[i].Position.x == -19f);
 
-                    rocketIntervals[i] = 999f;
+                    rocketSpawnInfo.RemoveAt(i);
                 }
             }
         }
@@ -136,8 +134,10 @@ public class StageHazardSpawn : MonoBehaviour
 
             for (int i = 0; i < num; i++)
             {
-                rocketIntervals[i] = Random.Range(2f, 5f);
-                rocketPositions[i] = new Vector2((Random.Range(0f, 1f) < 0.5f) ? -14f : 14f, Random.Range(pipeRange.y * -1, pipeRange.y));
+                //Add Rocket to SpawnInfo
+                rocketSpawnInfo.Add(new EnemySpawnInfo(
+                    Random.Range(2f, 5f),
+                    new Vector2((Random.Range(0f, 1f) < 0.5f) ? -14f : 14f, Random.Range(pipeRange.y * -1, pipeRange.y))));
             }
         }
 
@@ -188,38 +188,6 @@ public class StageHazardSpawn : MonoBehaviour
                 counter++;
         }
         return counter;
-    }
-
-    public GameObject RocketAddPool(int count)
-    {
-        GameObject rocket = null;
-        for (int i = 0; i < count; i++)
-        {
-            rocket = Instantiate(rocketPrefab, Vector3.zero, Quaternion.identity);
-            //rocket = 
-            rocket.SetActive(false);
-            //Debug.Log(rocket);
-            rocketPool.Add(rocket);
-
-            //rocket = tempRocket;
-        }
-        return rocket;
-    }
-
-    public GameObject GetRocket()
-    {
-        for (int i = 0; i < rocketPool.Count; i++)
-        {
-            if (!rocketPool[i].activeInHierarchy)
-            {
-                rocketPool[i].SetActive(true);
-                
-                return rocketPool[i];
-            }
-        }
-        
-        tempRocket = RocketAddPool(10);
-        return tempRocket;
     }
 
     public void ActivateGoldUFO(int score)
