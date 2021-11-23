@@ -15,6 +15,8 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Vector2 startPos;
     private Vector2 goalPos;
 
+    private bool hasMoved;
+
     [HideInInspector] public Image background;
 
     public void OnPointerClick(PointerEventData eventData)
@@ -35,6 +37,8 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void MoveToward(Vector2 displacement)
     {
         goalPos = startPos + displacement;
+
+        hasMoved = true;
     }
 
     public void SetContentActive(bool flag)
@@ -58,6 +62,8 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         startPos = rectTransform.anchoredPosition;
         goalPos = startPos;
 
+        hasMoved = false;
+
         tabOwner.Subscribe(this);
     }
 
@@ -70,7 +76,11 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void FixedUpdate()
     {
         //Debug.Log(rectTransform.position);
-        rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, goalPos, 0.1f);
+        if (hasMoved)
+        {
+            rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, goalPos, 0.1f);
+        }
+
         //transfo.position = Vector3.Lerp(transform.position, goalPos, 0.1f);
     }
 }

@@ -14,7 +14,7 @@ public class EnemySpawnInfo
         pos = position;
     }
 
-    public void TimePass(float time) { Debug.Log("timer"); timer -= time; }
+    public void TimePass(float time) { timer -= time; }
     public void SetX(float num) { pos.x = num; }
     public void SetY(float num) { pos.y = num; }
 

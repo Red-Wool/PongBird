@@ -11,6 +11,7 @@ public class TabGroup : MonoBehaviour
     private TabButton selectedButton;
 
     [SerializeField] private bool changeContent;
+    [SerializeField] private bool changeDisplacement;
 
     [SerializeField] private Vector2 selectDisplacement;
 
@@ -39,7 +40,7 @@ public class TabGroup : MonoBehaviour
         //Debug.Log("Entered Prozimity!");
 
         ResetTabs();
-        button.MoveToward(selectDisplacement);
+        ButtonMove(button, selectDisplacement);
 
     }
 
@@ -49,10 +50,19 @@ public class TabGroup : MonoBehaviour
 
         if (selectedButton != null && selectedButton != button)
         {
-            button.MoveToward(Vector3.zero);
+            ButtonMove(button, Vector3.zero);
         }
             
 
+    }
+
+    public void ButtonMove(TabButton button, Vector3 pos)
+    {
+        if (changeDisplacement)
+        {
+            button.MoveToward(pos);
+        }
+        
     }
 
     public void OnTabClick(TabButton button)
@@ -60,7 +70,7 @@ public class TabGroup : MonoBehaviour
         selectedButton = button;
 
         ResetTabs();
-        button.MoveToward(selectDisplacement);
+        ButtonMove(button, selectDisplacement);
 
         button.background.color = selectColor;
     }
@@ -78,19 +88,19 @@ public class TabGroup : MonoBehaviour
             selectedButton = primaryButton;
         }
 
-        selectedButton.MoveToward(selectDisplacement);
+        ButtonMove(selectedButton, selectDisplacement);
 
         foreach (TabButton button in tabs)
         {
             if (selectedButton != button)
             {
                 button.background.color = idleColor;
-                button.MoveToward(Vector3.zero);
+                ButtonMove(button, Vector3.zero);
             }
             else
             {
                 button.background.color = selectColor;
-                button.MoveToward(selectDisplacement);
+                ButtonMove(button, selectDisplacement);
             }
 
             if (changeContent)
@@ -109,7 +119,7 @@ public class TabGroup : MonoBehaviour
 
         selectedButton = primaryButton;
 
-        selectedButton.MoveToward(selectDisplacement);
+        ButtonMove(selectedButton, selectDisplacement);
 
         ResetTabs();
     }
