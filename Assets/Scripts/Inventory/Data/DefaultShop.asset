@@ -71,7 +71,7 @@ MonoBehaviour:
   - tag: TinyPaddle
     name: Tiny Paddles
     color: {r: 0.8983997, g: 0.4292453, b: 1, a: 0}
-    desc: placeholder
+    desc: "Smaller paddles \nto miss"
     price: 150
     type: 0
   - tag: Snaked

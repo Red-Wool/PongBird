@@ -15,6 +15,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject shopDisplayPrefab;
     [SerializeField] private Transform shopParent;
 
+    [SerializeField] private PlayerGamemodeManager playModeM;
+
     //private string[] names = { "HighJump", "PaddleBoost", "SuperFast", "ThrillTime", "InfipaddleBounds", "DrillEscort", "PipeDream", "DrillMode"};
 
     private List<ItemToggle> inventory;
@@ -30,16 +32,20 @@ public class InventoryManager : MonoBehaviour
 
         inventory = new List<ItemToggle>();
 
-        for(int i = 0; i < shop.shopData.Length - 1; i++)
+        for(int i = 0; i < shop.shopData.Length; i++)
         {
             ShopItem tempItem = shop.shopData[i];
 
             GameObject display = Instantiate(shopDisplayPrefab, shopParent);
             display.name = tempItem.Tag;
 
-            display.GetComponent<ShopButton>().SetUp(tempItem.Tag, tempItem.Info, tempItem.Price);
+            display.GetComponent<ShopButton>().SetUp(tempItem.Tag, tempItem.Info, tempItem.Price, tempItem.Type);
 
-            inventory.Add(new ItemToggle(tempItem.Tag, false));
+            if (tempItem.Type == ShopItemType.Varient)
+            {
+                inventory.Add(new ItemToggle(tempItem.Tag, false));
+            }
+
         }
 
         coins = 999;
@@ -72,7 +78,7 @@ public class InventoryManager : MonoBehaviour
         return inventory.Count;
     }
 
-    public void BuyItem(int value, string index)
+    public void BuyItem(int value, string index, ShopItemType type)
     {
         coins -= value;
         ind = FindID(index);
@@ -81,8 +87,6 @@ public class InventoryManager : MonoBehaviour
             //Debug.Log("Worked!");
 
             ChangeInventory(ind, true, true);
-
-            //Debug.Log(lastReference.ToString());
         }
         else
         {
@@ -143,6 +147,11 @@ public class InventoryManager : MonoBehaviour
         }
 
         return -1;
+    }
+
+    public PlayerModeData GetCurrentPlayerMode()
+    {
+        return playModeM.GetCurrentMode();
     }
 }
 

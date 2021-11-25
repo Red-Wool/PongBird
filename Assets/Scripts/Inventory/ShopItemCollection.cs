@@ -6,4 +6,6 @@ using UnityEngine;
 public class ShopItemCollection : ScriptableObject
 {
     public ShopItem[] shopData;
+
+
 }

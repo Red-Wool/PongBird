@@ -32,6 +32,26 @@ public struct ShopItem
     [SerializeField] private ShopItemType type; public ShopItemType Type { get { return type; } }
 }
 
+[System.Serializable]
+public struct PlayerModeData
+{
+    [SerializeField] private string tag; public string Tag { get { return tag; } }
+    [SerializeField] private PlayerMode gameMode; public PlayerMode GameMode { get { return gameMode; } }
+
+    [SerializeField] private RuntimeAnimatorController[] skin; 
+    public RuntimeAnimatorController GetSkin(int i)
+    {
+        if (i < 0 || i >= skin.Length)
+        {
+            Debug.LogError("Invalid Skin ID! Tag: " + tag + " Index: " + i);
+        }
+
+        return skin[Mathf.Clamp(i, 0, skin.Length - 1)];
+    }
+    [SerializeField] private Sprite displaySprite; public Sprite Sprite { get { return displaySprite; } }
+    [SerializeField] private GameObject particlePrefab; public GameObject Particle { get { return particlePrefab; } }
+}
+
 public enum ShopItemType
 {
     Varient,
@@ -58,6 +78,22 @@ public struct ItemToggle
     public override string ToString()
     {
         return "ID: " + ID + " Bought: " + bought + " Toggled: " + toggled;
+    }
+}
+
+public struct ModeToggle
+{
+    public GameObject selectObject;
+
+    public PlayerModeData modeData;
+
+    public bool bought;
+
+    public ModeToggle(GameObject select, PlayerModeData data, bool buy)
+    {
+        selectObject = select;
+        modeData = data;
+        bought = buy;
     }
 }
 

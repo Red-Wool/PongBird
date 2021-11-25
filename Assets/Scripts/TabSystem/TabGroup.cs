@@ -8,7 +8,7 @@ public class TabGroup : MonoBehaviour
 
     private List<TabButton> tabs;
 
-    private TabButton selectedButton;
+    private TabButton selectedButton; public TabButton SelectedButton { get { return selectedButton;} }
 
     [SerializeField] private bool changeContent;
     [SerializeField] private bool changeDisplacement;
@@ -21,6 +21,11 @@ public class TabGroup : MonoBehaviour
     private void Start()
     {
         RestartTab();
+    }
+
+    public void SetPrimary (TabButton button)
+    {
+        primaryButton = button;
     }
 
     public void Subscribe(TabButton button)

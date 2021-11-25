@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [SerializeField] private GameObject content;
 
     private RectTransform rectTransform;
+
+    //private bool buttonActive;
 
     private Vector2 startPos;
     private Vector2 goalPos;
@@ -65,12 +68,6 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         hasMoved = false;
 
         tabOwner.Subscribe(this);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()
