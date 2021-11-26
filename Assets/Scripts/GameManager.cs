@@ -118,10 +118,10 @@ public class GameManager : MonoBehaviour
 
         score = 0;
 
-        if (InventoryManager.instance.CheckItemValid("DrillMode"))
+        /*if (InventoryManager.instance.CheckItemValid("DrillMode"))
         {
             //player.GetComponent<Animator>().runtimeAnimatorController = skin;
-        }
+        }*/
 
         speedUpTextTimer = 1f;
 

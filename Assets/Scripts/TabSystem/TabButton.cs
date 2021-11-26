@@ -20,7 +20,23 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private bool hasMoved;
 
-    [HideInInspector] public Image background;
+    private Image background; public Image Background { 
+        get
+        {
+            if (background == null)
+            {
+                background = GetComponent<Image>();
+            }
+            return background;
+        }
+        set 
+        { 
+            if (background == null)
+            {
+                background = GetComponent<Image>();
+            }
+            background = value;
+        } }
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -54,6 +70,11 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             Debug.Log(this.name + " has no Content...");
         }
+    }
+
+    public void SetOwner(TabGroup group)
+    {
+        tabOwner = group;
     }
 
     // Start is called before the first frame update

@@ -172,6 +172,30 @@ public class FishBirdController : MonoBehaviour
         sr.flipX = false;
     }
 
+    public void SetMode(PlayerModeData data, int playerNum)
+    {
+        playerMode = data.GameMode;
+        playerMode.Reset(this);
+
+        GetComponent<Animator>().runtimeAnimatorController = data.GetSkin(playerNum);
+
+        flapPS.Stop();
+        var main = flapPS.main;
+        main.loop = false;
+        
+        Transform temp = gameObject.transform.Find(data.Tag);
+        if (temp == null)
+        {
+            flapPS = Instantiate(data.Particle, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+        }
+        else
+        {
+            ParticleSystem ps = temp.GetComponent<ParticleSystem>();
+            flapPS = ps;
+        }
+
+    }
+
     public void SetInvincible(float time)
     {
         isInvinicible = true;

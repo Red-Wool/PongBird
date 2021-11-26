@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerGamemodeManager : MonoBehaviour
 {
@@ -17,13 +19,18 @@ public class PlayerGamemodeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetUpInventory();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void BuyMode (string tag)
+    {
+        Find(tag).selectObject.SetActive(true);
     }
 
     private ModeToggle Find (string tag)
@@ -61,6 +68,10 @@ public class PlayerGamemodeManager : MonoBehaviour
         {
             GameObject display = Instantiate(tabPrefab, tabParent);
 
+            playModeTab.Subscribe(display.GetComponent<TabButton>());
+            display.gameObject.GetComponentInChildren<TMP_Text>(true).text = playModeCollection.playerModeData[i].Name;
+            display.gameObject.transform.Find("Image").GetComponent<Image>().sprite = playModeCollection.playerModeData[i].Sprite;
+
             if (i == 0)
             {
                 display.SetActive(true);
@@ -73,8 +84,10 @@ public class PlayerGamemodeManager : MonoBehaviour
 
 
 
-            new ModeToggle(display, playModeCollection.playerModeData[i], false);
+            modeInventory.Add(new ModeToggle(display, playModeCollection.playerModeData[i], false));
         }
+
+        playModeTab.RestartTab();
     }
 
     public PlayerModeData GetCurrentMode()

@@ -10,6 +10,7 @@ public class TabGroup : MonoBehaviour
 
     private TabButton selectedButton; public TabButton SelectedButton { get { return selectedButton;} }
 
+    [SerializeField] private bool restartStartup;
     [SerializeField] private bool changeContent;
     [SerializeField] private bool changeDisplacement;
 
@@ -18,9 +19,9 @@ public class TabGroup : MonoBehaviour
     [SerializeField] private Color selectColor;
     [SerializeField] private Color idleColor;
 
-    private void Start()
+    private void Awake()
     {
-        RestartTab();
+        if (restartStartup) { RestartTab(); }
     }
 
     public void SetPrimary (TabButton button)
@@ -36,6 +37,8 @@ public class TabGroup : MonoBehaviour
         }
 
         tabs.Add(button);
+
+        button.SetOwner(this);
 
         ResetTabs();
     }
@@ -77,7 +80,7 @@ public class TabGroup : MonoBehaviour
         ResetTabs();
         ButtonMove(button, selectDisplacement);
 
-        button.background.color = selectColor;
+        button.Background.color = selectColor;
     }
 
     public void ResetTabs()
@@ -97,14 +100,15 @@ public class TabGroup : MonoBehaviour
 
         foreach (TabButton button in tabs)
         {
+
             if (selectedButton != button)
             {
-                button.background.color = idleColor;
+                button.Background.color = idleColor;
                 ButtonMove(button, Vector3.zero);
             }
             else
             {
-                button.background.color = selectColor;
+                button.Background.color = selectColor;
                 ButtonMove(button, selectDisplacement);
             }
 

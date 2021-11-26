@@ -36,6 +36,7 @@ public struct ShopItem
 public struct PlayerModeData
 {
     [SerializeField] private string tag; public string Tag { get { return tag; } }
+    [SerializeField] private string name; public string Name { get { return name; } }
     [SerializeField] private PlayerMode gameMode; public PlayerMode GameMode { get { return gameMode; } }
 
     [SerializeField] private RuntimeAnimatorController[] skin; 

@@ -62,13 +62,17 @@ public class ShopButton : MonoBehaviour
 
             //Allow Player to toggle or remove the item from shop when bought
             toggleButton.gameObject.SetActive(true);
-            Toggle();
+            
 
             button.gameObject.SetActive(false);
 
             if (disappear) 
             {
                 gameObject.SetActive(false);
+            }
+            else
+            {
+                Toggle();
             }
         }
     }

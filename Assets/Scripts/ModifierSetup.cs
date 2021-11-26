@@ -67,6 +67,9 @@ public class ModifierSetup : MonoBehaviour
         playerOne.Reset();
         playerTwo.Reset();
 
+        playerOne.SetMode(InventoryManager.instance.GetCurrentPlayerMode(), 0);
+        playerTwo.SetMode(InventoryManager.instance.GetCurrentPlayerMode(), 1);
+
         //Check HighJump
         if (InventoryManager.instance.CheckItemValid("HighJump")) 
         {

@@ -27,6 +27,10 @@ public class UFOMode : PlayerMode
     {
         player.GravityScale(0);
 
+        player.flapPS.Stop();
+        var main = player.flapPS.main;
+        main.loop = false;
+
         player.reserved = new float[1];
         player.reserved[0] = -1;
     }

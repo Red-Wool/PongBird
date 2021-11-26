@@ -84,9 +84,11 @@ public class InventoryManager : MonoBehaviour
         ind = FindID(index);
         if (ind >= 0)
         {
-            //Debug.Log("Worked!");
-
             ChangeInventory(ind, true, true);
+        }
+        else if (type == ShopItemType.PlayerMode)
+        {
+            playModeM.BuyMode(index);
         }
         else
         {

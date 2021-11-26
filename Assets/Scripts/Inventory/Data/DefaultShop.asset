@@ -90,5 +90,5 @@ MonoBehaviour:
     name: UFO!
     color: {r: 0.77647066, g: 0.7254902, b: 0.098039225, a: 0}
     desc: A mysterious UFO \nfrom a distant land...
-    price: 999999999
+    price: 500
     type: 1

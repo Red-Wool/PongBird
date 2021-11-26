@@ -19,5 +19,8 @@ public class FlapperMode : PlayerMode
     public override void Reset(FishBirdController player)
     {
         player.GravityScale(1);
+        player.flapPS.Stop();
+        var main = player.flapPS.main;
+        main.loop = false;
     }
 }
