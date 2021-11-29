@@ -28,7 +28,7 @@ MonoBehaviour:
     gameMode: {fileID: 11400000, guid: d026faec07a5a2e4aa3e155c5d2e6428, type: 2}
     skin:
     - {fileID: 9100000, guid: 7f25c3f4c3a25b04b88462c7e2f0ed93, type: 2}
-    - {fileID: 9100000, guid: 7f25c3f4c3a25b04b88462c7e2f0ed93, type: 2}
+    - {fileID: 9100000, guid: 9f48ca4e1d3f8934a88d388d537c92a5, type: 2}
     displaySprite: {fileID: 6912520627882625755, guid: 5df8e5ae83d9d7b43b93d4ea4fd9e2fc,
       type: 3}
     particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
@@ -38,7 +38,7 @@ MonoBehaviour:
     gameMode: {fileID: 11400000, guid: 5e9b043a879b0164cbf2ac81d4e7c3de, type: 2}
     skin:
     - {fileID: 9100000, guid: 7b01c8010d3055f4886ab550025a6183, type: 2}
-    - {fileID: 9100000, guid: 7b01c8010d3055f4886ab550025a6183, type: 2}
+    - {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
     displaySprite: {fileID: -2414885002918159582, guid: 1b8970c4c3d4e534f86ba420be626d6e,
       type: 3}
     particlePrefab: {fileID: 4211213139286153919, guid: 7ef38615fb4868c44b8dc8d90f641b14,

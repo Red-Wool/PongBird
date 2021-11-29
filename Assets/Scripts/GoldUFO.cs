@@ -13,10 +13,10 @@ public class GoldUFO : MonoBehaviour
     [SerializeField] private AnimationCurve yDist;
 
     [Header("References"), Space(10),
-     SerializeField] private GameObject coinPrefab;
+     SerializeField] private PoolObject coinPool;
     [SerializeField] private ParticleSystem coinPopPS;
 
-    private List<GameObject> coinPool = new List<GameObject>();
+    //private List<GameObject> coinPool = new List<GameObject>();
 
     private float moveTimer;
     private bool direction = false;
@@ -29,7 +29,7 @@ public class GoldUFO : MonoBehaviour
         //Debug.Log("Test");
         gameObject.SetActive(false);
 
-        CoinAddPool(20);
+        coinPool.AddPool(20);
     }
 
     // Update is called once per frame
@@ -61,7 +61,7 @@ public class GoldUFO : MonoBehaviour
         //Spawn Coins
         for (int i = 0; i < amount; i++)
         {
-            tempCoin = GetCoin();//Instantiate(coinPrefab, this.transform.position, Quaternion.identity);
+            tempCoin = coinPool.GetObject();//Instantiate(coinPrefab, this.transform.position, Quaternion.identity);
             tempCoin.transform.position = transform.position;
             tempCoin.GetComponent<Rigidbody2D>().velocity = new Vector2(
                 Random.Range(velocityRange.x * -1, velocityRange.x),
@@ -80,6 +80,7 @@ public class GoldUFO : MonoBehaviour
         tempScore = score;
     }
     
+    /*
     public GameObject CoinAddPool(int count)
     {
         GameObject coin = null;
@@ -110,5 +111,5 @@ public class GoldUFO : MonoBehaviour
 
         tempCoin = CoinAddPool(10);
         return tempCoin;
-    }
+    }*/
 }

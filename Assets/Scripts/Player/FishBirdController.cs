@@ -187,6 +187,7 @@ public class FishBirdController : MonoBehaviour
         if (temp == null)
         {
             flapPS = Instantiate(data.Particle, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+            flapPS.gameObject.name = data.Tag;
         }
         else
         {
