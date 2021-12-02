@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public int coins;
     private int nextSpeedUp = 5;
+
+    private bool playing;
 
     private float currentSpeed = 1f;
 
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
     private GameObject retryMenu;
     [SerializeField]
     private GameObject shopMenu;
+    [SerializeField]
+    private Button retryButton;
     [SerializeField]
     private GameObject ieMenu;
     [SerializeField]
@@ -63,9 +68,9 @@ public class GameManager : MonoBehaviour
         speedUpTextTimer += Time.deltaTime / 5;
         speedUpText.position = Vector3.up * speedUpTextCurve.Evaluate(speedUpTextTimer);
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!playing && retryButton.interactable && Input.GetKeyDown(ControlManager.instance.GetKey(GameControl.Action)))
         {
-            SceneManager.LoadScene(0);
+            Retry();
         }
     }
 
@@ -114,7 +119,7 @@ public class GameManager : MonoBehaviour
         retryMenu.SetActive(false);
         shopMenu.SetActive(false);
 
-        
+        playing = true;
 
         score = 0;
 
@@ -304,8 +309,21 @@ public class GameManager : MonoBehaviour
         Time.timeScale = currentSpeed;
         music.pitch = currentSpeed;
 
+        playing = false;
+
         playerM.Lose();
 
         retryMenu.SetActive(true);
+        if (score > 5)
+        {
+            retryButton.interactable = false;
+            StartCoroutine(StartGameDelay(Mathf.Min(0.3f + score * 0.01f, 1.5f)));
+        }
+    }
+
+    private IEnumerator StartGameDelay(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        retryButton.interactable = true;
     }
 }

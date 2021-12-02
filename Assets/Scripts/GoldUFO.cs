@@ -79,37 +79,4 @@ public class GoldUFO : MonoBehaviour
 
         tempScore = score;
     }
-    
-    /*
-    public GameObject CoinAddPool(int count)
-    {
-        GameObject coin = null;
-        for (int i = 0; i < count; i++)
-        {
-            coin = Instantiate(coinPrefab, Vector3.zero, Quaternion.identity);
-
-            coin.SetActive(false);
-
-            coinPool.Add(coin);
-
-            //rocket = tempRocket;
-        }
-        return coin;
-    }
-
-    public GameObject GetCoin()
-    {
-        for (int i = 0; i < coinPool.Count; i++)
-        {
-            if (!coinPool[i].activeInHierarchy)
-            {
-                coinPool[i].SetActive(true);
-
-                return coinPool[i];
-            }
-        }
-
-        tempCoin = CoinAddPool(10);
-        return tempCoin;
-    }*/
 }

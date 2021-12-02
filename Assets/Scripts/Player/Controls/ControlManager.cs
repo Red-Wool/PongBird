@@ -22,6 +22,8 @@ public class ControlManager : MonoBehaviour
     [SerializeField] private KeyCode playerOneActionCoop;
     [SerializeField] private KeyCode playerTwoActionCoop;
 
+    
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -87,10 +89,24 @@ public class ControlManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public Dictionary<GameControl, KeyCode> GetAllControls()
     {
-        
+        Dictionary<GameControl, KeyCode> cDict = new Dictionary<GameControl, KeyCode>();
+
+        foreach(GameControl control in System.Enum.GetValues(typeof(GameControl)))
+        {
+            cDict.Add(control, GetKey(control));
+        }
+
+        return cDict;
+    }
+
+    public void SetAllControls(Dictionary<GameControl, KeyCode> cDict)
+    {
+        foreach (GameControl control in System.Enum.GetValues(typeof(GameControl)))
+        {
+            ControlChange(control, cDict[control]);
+        }
     }
 }
 
