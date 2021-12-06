@@ -61,7 +61,7 @@ public enum ShopItemType
 }
 
 [System.Serializable]
-public struct ItemToggle
+public class ItemToggle
 {
     public string ID { get; }
     public bool bought;
@@ -82,7 +82,8 @@ public struct ItemToggle
     }
 }
 
-public struct ModeToggle
+[System.Serializable]
+public class ModeToggle
 {
     public GameObject selectObject;
 

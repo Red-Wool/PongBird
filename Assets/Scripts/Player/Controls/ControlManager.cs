@@ -5,87 +5,81 @@ using UnityEngine;
 //Handles Button Inputs
 public class ControlManager : MonoBehaviour
 {
-    public static ControlManager instance;
+    private static ControlManager _instance;
+    public static ControlManager instance{ get
+        {
+            if (_instance == null)
+            {
+                _instance = new ControlManager();
+            }
+
+            return _instance;
+        } }
 
     public bool playingCoop;
-    public KeyCode CurrentLeftPaddle { get { return playingCoop ? leftPaddleCoop : leftPaddle; } }
-    public KeyCode CurrentRightPaddle { get { return playingCoop ? rightPaddleCoop : rightPaddle; } }
-    public KeyCode CurrentPlayerOneAction { get { return playingCoop ? playerOneActionCoop : playerAction; } }
-    public KeyCode CurrentPlayerTwoAction { get { return playerTwoActionCoop; } }
+    public KeyCode CurrentLeftPaddle { get { return playingCoop ? SaveData.instance.data.controls[GameControl.LeftCoop] : SaveData.instance.data.controls[GameControl.Left]; } }
+    public KeyCode CurrentRightPaddle { get { return playingCoop ? SaveData.instance.data.controls[GameControl.RightCoop] : SaveData.instance.data.controls[GameControl.Right]; } }
+    public KeyCode CurrentPlayerOneAction { get { return playingCoop ? SaveData.instance.data.controls[GameControl.ActionOne] : SaveData.instance.data.controls[GameControl.Action]; } }
+    public KeyCode CurrentPlayerTwoAction { get { return SaveData.instance.data.controls[GameControl.ActionTwo]; } }
 
-    [SerializeField] private KeyCode leftPaddle;
-    [SerializeField] private KeyCode rightPaddle;
-    [SerializeField] private KeyCode playerAction;
+    [SerializeField] private DefaultControl[] defaultControls;
+    /*[SerializeField] private DefaultControl rightPaddle;
+    [SerializeField] private DefaultControl playerAction;
 
-    [SerializeField] private KeyCode leftPaddleCoop;
-    [SerializeField] private KeyCode rightPaddleCoop;
-    [SerializeField] private KeyCode playerOneActionCoop;
-    [SerializeField] private KeyCode playerTwoActionCoop;
+    [SerializeField] private DefaultControl leftPaddleCoop;
+    [SerializeField] private DefaultControl rightPaddleCoop;
+    [SerializeField] private DefaultControl playerOneActionCoop;
+    [SerializeField] private DefaultControl playerTwoActionCoop;*/
 
     
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance)
+        if (_instance)
         {
             Destroy(this);
         }
         else
         {
-            instance = this;
+            _instance = this;
         }
+        SaveData.SetData += LoadSaveData;
+    }
 
+    private void LoadSaveData()
+    {
+        if (SaveData.instance.data.controls == null || SaveData.instance.data.controls.Count == 0)
+        {
+            Dictionary<GameControl, KeyCode> dict = new Dictionary<GameControl, KeyCode>();
+            for (int i = 0; i < defaultControls.Length; i++)
+            {
+                dict.Add(defaultControls[i].control, defaultControls[i].key);
+            }
+            SaveData.instance.data.controls = dict;
+        }
     }
 
     public KeyCode GetKey(GameControl control)
     {
-        switch (control)
-        {
-            case GameControl.Left:
-                return leftPaddle;
-            case GameControl.Right:
-                return rightPaddle;
-            case GameControl.Action:
-                return playerAction;
-            case GameControl.LeftCoop:
-                return leftPaddleCoop;
-            case GameControl.RightCoop:
-                return rightPaddleCoop;
-            case GameControl.ActionOne:
-                return playerOneActionCoop;
-            case GameControl.ActionTwo:
-                return playerTwoActionCoop;
-            default:
-                return leftPaddle;
-        }
+        return SaveData.instance.data.controls[control];
     }
 
     public void ControlChange(GameControl control, KeyCode key)
     {
-        switch (control)
+        SaveData.instance.data.controls[control] = key;
+
+        SaveData.instance.Save();
+    }
+
+    public void ControlDefault(GameControl control)
+    {
+        for (int i = 0; i < defaultControls.Length; i++)
         {
-            case GameControl.Left:
-                leftPaddle = key;
-                break;
-            case GameControl.Right:
-                rightPaddle = key;
-                break;
-            case GameControl.Action:
-                playerAction = key;
-                break;
-            case GameControl.LeftCoop:
-                leftPaddleCoop = key;
-                break;
-            case GameControl.RightCoop:
-                rightPaddleCoop = key;
-                break;
-            case GameControl.ActionOne:
-                playerOneActionCoop = key;
-                break;
-            case GameControl.ActionTwo:
-                playerTwoActionCoop = key;
-                break;
+            if (control == defaultControls[i].control)
+            {
+                ControlChange(control, defaultControls[i].key);
+            }
         }
     }
 
@@ -120,4 +114,12 @@ public enum GameControl
     RightCoop,
     ActionOne,
     ActionTwo,
+}
+
+[System.Serializable]
+public struct DefaultControl
+{
+    [SerializeField] private string name;
+    public GameControl control;
+    public KeyCode key;
 }

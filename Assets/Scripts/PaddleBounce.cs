@@ -18,11 +18,11 @@ public class PaddleBounce : MonoBehaviour
     private const float GRAPHICSIZE = 3.2f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        SetControl();
+        SaveData.DataLoaded += SetControl;
     }
 
     // Update is called once per frame

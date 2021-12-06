@@ -11,8 +11,7 @@ public class SaveManager : MonoBehaviour
     public static bool Save(string pathName, object data)
     {
         BinaryFormatter formatter = GetBinaryFormatter();
-
-        if (Directory.Exists(Application.persistentDataPath + "/SaveData"))
+        if (!Directory.Exists(Application.persistentDataPath + "/SaveData"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/SaveData/" + pathName + ".save");
         }
@@ -28,7 +27,7 @@ public class SaveManager : MonoBehaviour
 
     public static object Load(string pathName)
     {
-        if (File.Exists(pathName))
+        if (!File.Exists(pathName))
         {
             return null;    
         }

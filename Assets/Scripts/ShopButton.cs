@@ -19,25 +19,13 @@ public class ShopButton : MonoBehaviour
     private bool disappear = false;
     private ShopItemType shopType;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetUp(string ind, string info, int price, ShopItemType type)
+    public void SetUp(ShopItem temp, bool bought)
     {
         //Varible Setup
-        index = ind;
+        index = temp.Tag;
 
-        disappear = type == ShopItemType.PlayerMode;
-        shopType = type;
+        shopType = temp.Type;
+        disappear = shopType == ShopItemType.PlayerMode;
 
         //Get References
         button = gameObject.GetComponentInChildren<Button>(true);
@@ -47,9 +35,18 @@ public class ShopButton : MonoBehaviour
         toggleButton.onValueChanged.AddListener(delegate { Toggle(); });
 
         //Find Objects and set them up
-        transform.Find("DescText").GetComponent<TextMeshProUGUI>().text = info;
-        transform.Find("BuyButton").Find("PriceDisplay").GetComponent<TextMeshProUGUI>().text = price.ToString();
-        value = price;
+        transform.Find("DescText").GetComponent<TextMeshProUGUI>().text = temp.Info;
+
+        if (!bought) //Only Set up buying if not bought yet
+        {
+            transform.Find("BuyButton").Find("PriceDisplay").GetComponent<TextMeshProUGUI>().text = temp.Price.ToString();
+            value = temp.Price;
+        }
+        else
+        {
+            toggleButton.isOn = false; //Activate it! but turn it off 
+            ActivateButton(); 
+        }
     }
 
     public void Buy()
@@ -61,19 +58,22 @@ public class ShopButton : MonoBehaviour
             InventoryManager.instance.BuyItem(value, index, shopType);
 
             //Allow Player to toggle or remove the item from shop when bought
-            toggleButton.gameObject.SetActive(true);
-            
+            ActivateButton();
+        }
+    }
 
-            button.gameObject.SetActive(false);
+    private void ActivateButton() //Send the object to the correct area
+    {
+        button.gameObject.SetActive(false);
+        toggleButton.gameObject.SetActive(true);
 
-            if (disappear) 
-            {
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                Toggle();
-            }
+        if (disappear)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            Toggle();
         }
     }
 

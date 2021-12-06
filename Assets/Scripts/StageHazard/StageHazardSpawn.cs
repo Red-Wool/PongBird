@@ -83,34 +83,30 @@ public class StageHazardSpawn : MonoBehaviour
 
         }
 
-        //Check if Pipe Dream
-        if (!InventoryManager.instance.CheckItemValid("PipeDream"))
+        //Manage Rockets
+        rocketTimer = Time.deltaTime * Time.timeScale;
+
+        //goes through rocket intervals
+        for (int i = rocketSpawnInfo.Count - 1; i >= 0; i--)
         {
-            //Manage Rockets
-            rocketTimer = Time.deltaTime * Time.timeScale;
+            rocketSpawnInfo[i].TimePass(rocketTimer);
 
-            //goes through rocket intervals
-            for (int i = rocketSpawnInfo.Count - 1; i >= 0; i--)
+            //Send the warning before they come
+            if (rocketSpawnInfo[i].Time - 2f < rocketTimer && Mathf.Abs(rocketSpawnInfo[i].Position.x) == 14f)
             {
-                rocketSpawnInfo[i].TimePass(rocketTimer); 
+                //Debug.Log("ParticleActivate!");
+                rocketPS.transform.position = rocketSpawnInfo[i].Position;
+                rocketPS.Play();
 
-                //Send the warning before they come
-                if (rocketSpawnInfo[i].Time - 2f < rocketTimer && Mathf.Abs(rocketSpawnInfo[i].Position.x) == 14f)
-                {
-                    //Debug.Log("ParticleActivate!");
-                    rocketPS.transform.position = rocketSpawnInfo[i].Position;
-                    rocketPS.Play();
+                rocketSpawnInfo[i].SetX((rocketSpawnInfo[i].Position.x == 14f) ? 19f : -19f);
+            }
+            else if (rocketSpawnInfo[i].Time < 0) // Launch Rocket when it is time
+            {
+                tempRocket = rocketPool.GetObject();
+                tempRocket.transform.position = rocketSpawnInfo[i].Position;
+                tempRocket.GetComponent<FlyingDrill>().SetUpRocket(rocketSpawnInfo[i].Position.x == -19f);
 
-                    rocketSpawnInfo[i].SetX((rocketSpawnInfo[i].Position.x == 14f) ? 19f : -19f);
-                }
-                else if (rocketSpawnInfo[i].Time < 0) // Launch Rocket when it is time
-                {
-                    tempRocket = rocketPool.GetObject();
-                    tempRocket.transform.position = rocketSpawnInfo[i].Position;
-                    tempRocket.GetComponent<FlyingDrill>().SetUpRocket(rocketSpawnInfo[i].Position.x == -19f);
-
-                    rocketSpawnInfo.RemoveAt(i);
-                }
+                rocketSpawnInfo.RemoveAt(i);
             }
         }
     }

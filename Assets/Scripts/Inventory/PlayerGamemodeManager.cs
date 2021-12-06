@@ -44,7 +44,7 @@ public class PlayerGamemodeManager : MonoBehaviour
         }
 
         Debug.LogError("Not Valid Tag!");
-        return new ModeToggle();
+        return new ModeToggle(null, playModeCollection.playerModeData[0], false);
     }
 
     private ModeToggle Find(GameObject lookObject)
@@ -58,7 +58,7 @@ public class PlayerGamemodeManager : MonoBehaviour
         }
 
         Debug.LogError("Not Valid Object!");
-        return new ModeToggle();
+        return new ModeToggle(null, playModeCollection.playerModeData[0], false);
     }
 
     private void SetUpInventory()

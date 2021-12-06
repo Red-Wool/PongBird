@@ -50,16 +50,18 @@ public class GameManager : MonoBehaviour
     private int highScore;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Retry();
-
+        //Retry();
         Time.timeScale = 0f;
-        /*score = 0;
 
-        speedUpTextTimer = 1f;
+        SaveData.DataLoaded += Retry;
+    }
 
-        UpdateScore(0);*/
+    private void Start()
+    {
+        SaveData.instance.Set();
+        SaveData.instance.Loaded();
     }
 
     // Update is called once per frame
@@ -123,11 +125,6 @@ public class GameManager : MonoBehaviour
 
         score = 0;
 
-        /*if (InventoryManager.instance.CheckItemValid("DrillMode"))
-        {
-            //player.GetComponent<Animator>().runtimeAnimatorController = skin;
-        }*/
-
         speedUpTextTimer = 1f;
 
         nextSpeedUp = 5;
@@ -146,8 +143,6 @@ public class GameManager : MonoBehaviour
 
         stageHs.coop = playerM.PlayingCoop;
 
-        //stageHs.StageHazardSetUp(0, true);
-
         music.Play();
     }
 
@@ -157,7 +152,7 @@ public class GameManager : MonoBehaviour
         shopMenu.SetActive(true);
     }
 
-    public void OpenIEMenu()
+    /*public void OpenIEMenu()
     {
         shopMenu.SetActive(false);
 
@@ -293,7 +288,7 @@ public class GameManager : MonoBehaviour
             return s[s.Length - 1] + StringReverse(s.Substring(0, s.Length - 1));
         else
             return s;
-    }
+    }*/
 
     public void PlayerDefeated(GameObject player)
     {

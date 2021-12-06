@@ -46,18 +46,16 @@ public class FishBirdController : MonoBehaviour
     public Vector3 pos;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         beginPos = this.transform.position;
 
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
-        //pm = PlayerMode.Flapper;
-
-        SetControl();
-
         dead = false;
+
+        SaveData.DataLoaded += SetControl;
     }
 
     /*private void FixedUpdate()
