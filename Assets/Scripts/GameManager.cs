@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         speedUpTextTimer += Time.deltaTime / 5;
         speedUpText.position = Vector3.up * speedUpTextCurve.Evaluate(speedUpTextTimer);
 
-        if (!playing && retryButton.interactable && Input.GetKeyDown(ControlManager.instance.GetKey(GameControl.Action)))
+        if (!playing && retryButton.interactable && Input.GetKeyDown(ControlManager.instance.GetKey(GameControl.Action)) && !Input.GetMouseButtonDown(0))
         {
             Retry();
         }

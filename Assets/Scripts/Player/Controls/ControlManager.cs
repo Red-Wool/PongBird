@@ -23,14 +23,6 @@ public class ControlManager : MonoBehaviour
     public KeyCode CurrentPlayerTwoAction { get { return SaveData.instance.data.controls[GameControl.ActionTwo]; } }
 
     [SerializeField] private DefaultControl[] defaultControls;
-    /*[SerializeField] private DefaultControl rightPaddle;
-    [SerializeField] private DefaultControl playerAction;
-
-    [SerializeField] private DefaultControl leftPaddleCoop;
-    [SerializeField] private DefaultControl rightPaddleCoop;
-    [SerializeField] private DefaultControl playerOneActionCoop;
-    [SerializeField] private DefaultControl playerTwoActionCoop;*/
-
     
 
     // Start is called before the first frame update
