@@ -7,11 +7,16 @@ public class GoldUFO : MonoBehaviour
     private float coinTimer;
     private int tempScore;
 
-    public GameObject coinPrefab;
-    public Vector2 velocityRange;
+    [Header("GoldUFO Info"), Space(10),
+     SerializeField] private Vector2 velocityRange;
+    [SerializeField] private AnimationCurve xDist;
+    [SerializeField] private AnimationCurve yDist;
 
-    public AnimationCurve xDist;
-    public AnimationCurve yDist;
+    [Header("References"), Space(10),
+     SerializeField] private PoolObject coinPool;
+    [SerializeField] private ParticleSystem coinPopPS;
+
+    //private List<GameObject> coinPool = new List<GameObject>();
 
     private float moveTimer;
     private bool direction = false;
@@ -23,6 +28,8 @@ public class GoldUFO : MonoBehaviour
     {
         //Debug.Log("Test");
         gameObject.SetActive(false);
+
+        coinPool.AddPool(20);
     }
 
     // Update is called once per frame
@@ -48,9 +55,14 @@ public class GoldUFO : MonoBehaviour
 
     public void SpawnCoin(int amount)
     {
+        coinPopPS.gameObject.transform.position = this.transform.position;
+        coinPopPS.Play();
+
+        //Spawn Coins
         for (int i = 0; i < amount; i++)
         {
-            tempCoin = Instantiate(coinPrefab, this.transform.position, Quaternion.identity);
+            tempCoin = coinPool.GetObject();//Instantiate(coinPrefab, this.transform.position, Quaternion.identity);
+            tempCoin.transform.position = transform.position;
             tempCoin.GetComponent<Rigidbody2D>().velocity = new Vector2(
                 Random.Range(velocityRange.x * -1, velocityRange.x),
                 Random.Range(1f, velocityRange.y));
@@ -59,7 +71,6 @@ public class GoldUFO : MonoBehaviour
 
     public void StartSpawn(int score)
     {
-        Debug.Log("On the move!");
         direction = !direction;
 
         moveTimer = direction ? 0f : 1f;
@@ -68,6 +79,4 @@ public class GoldUFO : MonoBehaviour
 
         tempScore = score;
     }
-
-
 }

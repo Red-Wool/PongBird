@@ -7,6 +7,8 @@ TagManager:
   - Paddle
   - Bounds
   - Coin
+  - Net
+  - Enemy
   layers:
   - Default
   - TransparentFX

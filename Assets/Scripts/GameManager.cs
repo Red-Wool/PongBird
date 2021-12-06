@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +14,14 @@ public class GameManager : MonoBehaviour
     public int coins;
     private int nextSpeedUp = 5;
 
+    private bool playing;
+
     private float currentSpeed = 1f;
 
-    public StageHazardSpawn shs;
-    public ModifierSetup ms;
-    public FishBirdController player;
+    public StageHazardSpawn stageHs;
+    public ModifierSetup modSetup;
+    public PlayerManager playerM;
+    //public FishBirdController player;
 
     [SerializeField]
     private TextMeshProUGUI scoreboard;
@@ -30,6 +34,8 @@ public class GameManager : MonoBehaviour
     private GameObject retryMenu;
     [SerializeField]
     private GameObject shopMenu;
+    [SerializeField]
+    private Button retryButton;
     [SerializeField]
     private GameObject ieMenu;
     [SerializeField]
@@ -44,16 +50,18 @@ public class GameManager : MonoBehaviour
     private int highScore;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Retry();
-
+        //Retry();
         Time.timeScale = 0f;
-        /*score = 0;
 
-        speedUpTextTimer = 1f;
+        SaveData.DataLoaded += Retry;
+    }
 
-        UpdateScore(0);*/
+    private void Start()
+    {
+        SaveData.instance.Set();
+        SaveData.instance.Loaded();
     }
 
     // Update is called once per frame
@@ -62,9 +70,9 @@ public class GameManager : MonoBehaviour
         speedUpTextTimer += Time.deltaTime / 5;
         speedUpText.position = Vector3.up * speedUpTextCurve.Evaluate(speedUpTextTimer);
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!playing && retryButton.interactable && Input.GetKeyDown(ControlManager.instance.GetKey(GameControl.Action)))
         {
-            SceneManager.LoadScene(0);
+            Retry();
         }
     }
 
@@ -72,12 +80,9 @@ public class GameManager : MonoBehaviour
     {
         UpdateScore(1);
 
-        shs.StageHazardSetUp(score, direction);
+        modSetup.ScoreChange(score);
 
-        if (score % 6 == 0 || Random.Range(0f, 1f) < 0.1f)
-        {
-            InventoryManager.instance.ActivateGoldUFO(Mathf.Clamp(score / (5 + score / 4), 1, 4));
-        }
+        stageHs.StageHazardSetUp(score, direction);
 
         CalculateSpeed();
     }
@@ -116,33 +121,27 @@ public class GameManager : MonoBehaviour
         retryMenu.SetActive(false);
         shopMenu.SetActive(false);
 
-        player.Reset();
-        player.bounceVal = (InventoryManager.instance.CheckItemValid("HighJump")) ? 15f : 10f;
+        playing = true;
 
         score = 0;
 
-        nextSpeedUp = 5;
-
-        if (InventoryManager.instance.CheckItemValid("DrillMode"))
-        {
-            player.GetComponent<Animator>().runtimeAnimatorController = skin;
-        }
-
         speedUpTextTimer = 1f;
+
+        nextSpeedUp = 5;
 
         if (InventoryManager.instance.CheckItemValid("SuperFast"))
         {
             nextSpeedUp = 0;
             currentSpeed = 1.4f;
         }
-        
-        CalculateSpeed();
 
-        ms.SetUp();
+        modSetup.SetUp();
+
+        CalculateSpeed();
 
         UpdateScore(0);
 
-        //shs.StageHazardSetUp(0, true);
+        stageHs.coop = playerM.PlayingCoop;
 
         music.Play();
     }
@@ -153,7 +152,7 @@ public class GameManager : MonoBehaviour
         shopMenu.SetActive(true);
     }
 
-    public void OpenIEMenu()
+    /*public void OpenIEMenu()
     {
         shopMenu.SetActive(false);
 
@@ -289,6 +288,14 @@ public class GameManager : MonoBehaviour
             return s[s.Length - 1] + StringReverse(s.Substring(0, s.Length - 1));
         else
             return s;
+    }*/
+
+    public void PlayerDefeated(GameObject player)
+    {
+        if (playerM.PlayerDefeated(player))
+        {
+            LoseGame();
+        }
     }
 
     public void LoseGame()
@@ -297,6 +304,21 @@ public class GameManager : MonoBehaviour
         Time.timeScale = currentSpeed;
         music.pitch = currentSpeed;
 
+        playing = false;
+
+        playerM.Lose();
+
         retryMenu.SetActive(true);
+        if (score > 5)
+        {
+            retryButton.interactable = false;
+            StartCoroutine(StartGameDelay(Mathf.Min(0.3f + score * 0.01f, 1.5f)));
+        }
+    }
+
+    private IEnumerator StartGameDelay(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        retryButton.interactable = true;
     }
 }
