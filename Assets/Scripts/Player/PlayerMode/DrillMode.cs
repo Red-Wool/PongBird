@@ -6,7 +6,7 @@ using UnityEngine;
 public class DrillMode : PlayerMode //Code for our favorite Drill
 {
     //Varible Declaration
-    public float speedMultiplier;
+    public float speedMult;
 
     public float speedIncrease;
     public float maxVelocity = 10f;
@@ -14,7 +14,7 @@ public class DrillMode : PlayerMode //Code for our favorite Drill
     public override void Action(FishBirdController player)
     {
         //Go Faster!
-        player.pos.x *= speedMultiplier;
+        player.pos.x *= speedMult;
 
         if (Input.GetKeyDown(player.savedKey))
         {

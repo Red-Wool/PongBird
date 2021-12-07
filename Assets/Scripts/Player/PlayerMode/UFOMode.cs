@@ -6,7 +6,7 @@ using UnityEngine;
 public class UFOMode : PlayerMode //Code for the speedy UFO
 {
     //Varible Declaration
-    public float speedMultiplier;
+    public float speedMult;
     public float accerleration;
 
     public Vector2 minMaxVelocity;
@@ -14,7 +14,7 @@ public class UFOMode : PlayerMode //Code for the speedy UFO
     public override void Action(FishBirdController player)
     {
         //Go Faster!
-        player.pos.x *= speedMultiplier;
+        player.pos.x *= speedMult;
 
         //Set velocity speeding Up or Down
         player.pos.y = Mathf.Clamp(player.GetRb().velocity.y + (player.bounceVal * accerleration * player.reserved[0] * Time.deltaTime), minMaxVelocity.x, minMaxVelocity.y);

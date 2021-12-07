@@ -43,3 +43,13 @@ MonoBehaviour:
       type: 3}
     particlePrefab: {fileID: 4211213139286153919, guid: 7ef38615fb4868c44b8dc8d90f641b14,
       type: 3}
+  - tag: DefenderMode
+    name: Defender
+    gameMode: {fileID: 11400000, guid: f34e52e61a72b2d4993cb7f1326d3886, type: 2}
+    skin:
+    - {fileID: 9100000, guid: eda2112a79b041f4595c58dbd4cd7f8d, type: 2}
+    - {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
+    displaySprite: {fileID: -6060674809971818376, guid: db893382527184743857c18b7a2de873,
+      type: 3}
+    particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
+      type: 3}

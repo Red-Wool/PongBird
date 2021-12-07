@@ -92,3 +92,9 @@ MonoBehaviour:
     desc: A mysterious UFO \nfrom a distant land...
     price: 500
     type: 1
+  - tag: DefenderMode
+    name: Defender!
+    color: {r: 0.8078432, g: 0.16862746, b: 0.17254902, a: 0}
+    desc: "grumpy Guardian \nof an unknown treasure"
+    price: 100
+    type: 1
