@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c838b4edc2d0d845b112089a66bfe08, type: 3}
   m_Name: DefenderMode
   m_EditorClassIdentifier: 
-  speedMultNorm: 0.9
-  speedMultRam: 2.5
-  accerlNorm: 0.4
-  accerlRam: 0.1
+  speedMultNorm: 0.2
+  speedMultRam: 3
+  oscSpdNorm: 0.3
+  oscSpdRam: 0
+  accel: 1.5
   oscTravel:
     serializedVersion: 2
     m_Curve:

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f3cab22cd771d49b0a269af5aecf3d, type: 3}
   m_Name: UFOMode
   m_EditorClassIdentifier: 
-  speedMultiplier: 1.4
+  speedMult: 1.4
   accerleration: 2.65
   minMaxVelocity: {x: -15, y: 15}
