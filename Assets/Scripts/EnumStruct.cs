@@ -100,6 +100,21 @@ public class ModeToggle
 }
 
 [System.Serializable]
+public class HighscoreSave
+{
+    public int score;
+    public string characterTag;
+    public string modeTag;
+
+    public HighscoreSave (int val, string cha, string mod)
+    {
+        score = val;
+        characterTag = cha;
+        modeTag = mod;
+    }
+}
+
+[System.Serializable]
 public struct MenuWindow
 {
     

@@ -98,3 +98,45 @@ MonoBehaviour:
     desc: "grumpy Guardian \nof an unknown treasure"
     price: 100
     type: 1
+  - tag: PsychicMode
+    name: Psychic!
+    color: {r: 0.7874864, g: 0.16862744, b: 0.80784315, a: 0}
+    desc: "grumpy Guardian \nof an unknown treasure"
+    price: 100
+    type: 1
+  - tag: Flipside
+    name: Flipside
+    color: {r: 0.4292453, g: 1, b: 0.6605234, a: 0}
+    desc: 'Someone appears to be
+
+      messing with the camera
+
+      <size=10>Shouldn''t change too much?'
+    price: 100
+    type: 0
+  - tag: Betrayal
+    name: Betrayal
+    color: {r: 0.7830189, g: 0.535644, b: 0.44691172, a: 0}
+    desc: ggg
+    price: 100
+    type: 0
+  - tag: Curveball
+    name: Curveball
+    color: {r: 0.50857455, g: 0.80784315, b: 0.16862744, a: 0}
+    desc: Homing enemies
+    price: 100
+    type: 0
+  - tag: Rain
+    name: Rain
+    color: {r: 0.16862744, g: 0.38762313, b: 0.80784315, a: 0}
+    desc: "grumpy Guardian \nof an unknown treasure"
+    price: 100
+    type: 0
+  - tag: PongRemix
+    name: Pong Remix
+    color: {r: 0.9058824, g: 0.9803922, b: 0.20392159, a: 0}
+    desc: '<size=16>Ready to switch things up?
+
+      Character change every score!'
+    price: 100
+    type: 0

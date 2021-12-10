@@ -23,9 +23,7 @@ public class DefenderMode : PlayerMode //Code for the hotheaded defender
         if (Input.GetKeyDown(player.savedKey))
         {
             //Particle System looped
-            var main = player.flapPS.main;
-            main.loop = true;
-            player.flapPS.Play();
+            ActivatePS(player, true);
         }
         else if (Input.GetKey(player.savedKey))
         {
@@ -36,6 +34,7 @@ public class DefenderMode : PlayerMode //Code for the hotheaded defender
             //Stop!
             var main = player.flapPS.main;
             main.loop = false;
+            player.flapPS.Stop();
         }
         else
         {
@@ -45,6 +44,8 @@ public class DefenderMode : PlayerMode //Code for the hotheaded defender
         //Sets speed and oscillate the player
         player.pos.x *= Mathf.Lerp(speedMultNorm, speedMultRam, player.reserved[1]);
         player.reserved[0] += Time.deltaTime * Mathf.Lerp(oscSpdNorm, oscSpdRam, player.reserved[1]);
+
+        player.pos.y = 0f;
 
         //Set Player Position
         player.transform.position = player.transform.position + Vector3.up * (oscTravel.Evaluate(player.reserved[0] % 1f) - player.transform.position.y);
@@ -61,12 +62,41 @@ public class DefenderMode : PlayerMode //Code for the hotheaded defender
 
         //Reserve a float in the player for a timer + Accerlation
         player.reserved = new float[2];
-        player.reserved[0] = 0.25f; //Timer
-        player.reserved[1] = 0f; //Accerlation
+        player.reserved[0] = CalculatePos(player.transform.position.y); //-Mathf.Acos(player.transform.position.y / 8) / (4 * Mathf.PI); //Timer
+        player.reserved[1] = 1f; //Accerlation
+    }
+
+    private float CalculatePos(float yVal)
+    {
+        Debug.Log(yVal);
+        for (float i = 0; i < 1; i += 0.01f)
+        {
+            if (Mathf.Abs(oscTravel.Evaluate(i) - yVal) <= 0.25f)
+            {
+                Debug.Log(i);
+                return i;
+            }
+        }
+        return -0; //Negative zero uhoh
     }
 
     private float CalculateRam(float current, float speed)
     {
         return Mathf.Clamp(current + (Time.deltaTime * speed), 0, 1);
+    }
+
+    private void ActivatePS(FishBirdController player, bool flag)
+    {
+        ParticleSystem[] children = player.flapPS.GetComponentsInChildren<ParticleSystem>();
+        for (int i = 0; i < children.Length; i++)
+        {
+            var main = children[i].main;
+            main.loop = flag;
+
+            if (flag)
+            {
+                player.flapPS.Play();
+            }
+        }
     }
 }

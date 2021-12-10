@@ -38,7 +38,17 @@ public class UFOMode : PlayerMode //Code for the speedy UFO
         main.loop = false;
 
         //Reserve a float in the player to tell what direction to go
-        player.reserved = new float[1];
-        player.reserved[0] = -1;
+        try
+        {
+            if (Mathf.Abs(player.reserved[0]) != 1)
+            {
+                player.reserved[0] = -1;
+            }
+        }
+        catch
+        {
+            player.reserved = new float[1];
+            player.reserved[0] = -1;
+        }
     }
 }

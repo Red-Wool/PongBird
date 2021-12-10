@@ -30,7 +30,11 @@ public class PlayerGamemodeManager : MonoBehaviour
 
     public void BuyMode (string tag)
     {
-        Find(tag).selectObject.SetActive(true);
+        ModeToggle toggle = Find(tag);
+        if (toggle.selectObject != null)
+        {
+            toggle.selectObject.SetActive(true);
+        }
     }
 
     private ModeToggle Find (string tag)
@@ -98,5 +102,10 @@ public class PlayerGamemodeManager : MonoBehaviour
         }
 
         return Find(playModeTab.SelectedButton.gameObject).modeData;
+    }
+
+    public PlayerModeData GetRandomMode()
+    {
+        return modeInventory[Random.Range(0, modeInventory.Count)].modeData;
     }
 }

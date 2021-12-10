@@ -51,5 +51,15 @@ MonoBehaviour:
     - {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
     displaySprite: {fileID: -6060674809971818376, guid: db893382527184743857c18b7a2de873,
       type: 3}
+    particlePrefab: {fileID: 8594746578002792512, guid: db443e5a24af58c468dafb329d476895,
+      type: 3}
+  - tag: PsychicMode
+    name: Psychic
+    gameMode: {fileID: 11400000, guid: f34e52e61a72b2d4993cb7f1326d3886, type: 2}
+    skin:
+    - {fileID: 9100000, guid: 2c42eebef542bbc47bc85cb4b6c4b518, type: 2}
+    - {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
+    displaySprite: {fileID: -6060674809971818376, guid: db893382527184743857c18b7a2de873,
+      type: 3}
     particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
       type: 3}

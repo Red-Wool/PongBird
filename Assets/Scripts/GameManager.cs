@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     {
         UpdateScore(1);
 
-        modSetup.ScoreChange(score);
+        modSetup.ScoreChange(score, direction);
 
         stageHs.StageHazardSetUp(score, direction);
 

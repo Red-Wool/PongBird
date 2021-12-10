@@ -129,5 +129,11 @@ public class InventoryManager : MonoBehaviour
     {
         return playModeM.GetCurrentMode();
     }
+    
+    //Gets Current Player Gamemode
+    public PlayerModeData GetRandomPlayerMode()
+    {
+        return playModeM.GetRandomMode();
+    }
 }
 

@@ -21,6 +21,8 @@ public class ModifierSetup : MonoBehaviour
 
     [Header("Drill Escort"), SerializeField, Space(10)] private GameObject escortDrill;
 
+    [Header("Particle Systems"), SerializeField, Space(10)] private ParticleSystem popPS;
+
     private bool escortAlive;
 
     //Extra Varibles to only instatiate once
@@ -148,12 +150,30 @@ public class ModifierSetup : MonoBehaviour
         paddleBoundery.SetActive(!InventoryManager.instance.CheckItemValid("InfipaddleBounds"));
     }
 
-    public void ScoreChange(int score)
+    public void ScoreChange(int score, bool direction)
     {
-        //Debug.Log(score);
+        //Make snake length longer when score increases
         if (InventoryManager.instance.CheckItemValid("Snaked"))
         {
             SnakeManager.instance.UpdateParticle(score);
+        }
+
+        //Send a drill when touch the paddle
+        if (InventoryManager.instance.CheckItemValid("Betrayal"))
+        {
+            posRef = direction ? leftPaddle.transform.position : rightPaddle.transform.position;
+            popPS.transform.position = posRef;
+            popPS.Play();
+
+            posRef.y = Mathf.Clamp(posRef.y, -30f, 30f);
+            posRef.x -= Mathf.Clamp(posRef.x, -1.5f, 1.5f); 
+            gameM.stageHs.SpawnDrill(posRef, direction);
+        }
+
+        if (InventoryManager.instance.CheckItemValid("PongRemix"))
+        {
+            playerOne.SetMode(InventoryManager.instance.GetRandomPlayerMode(), 0);
+            playerTwo.SetMode(InventoryManager.instance.GetRandomPlayerMode(), 1);
         }
     }
 
