@@ -17,49 +17,109 @@ MonoBehaviour:
     name: Flapper
     gameMode: {fileID: 11400000, guid: 5e63c83b7b7f1fa49b380b6588704cf6, type: 2}
     skin:
-    - {fileID: 9100000, guid: b5b34b2022b1c0e4badd8614259c644e, type: 2}
-    - {fileID: 9100000, guid: 719647bbd27034f40ab8492f24de5dab, type: 2}
+    - animation: {fileID: 9100000, guid: b5b34b2022b1c0e4badd8614259c644e, type: 2}
+      displayImg: {fileID: -1528581941426886678, guid: 850197bee4aebbe429e5ed2900b4bc94,
+        type: 3}
+      charColor: {r: 0.9058824, g: 0.9803922, b: 0.20392159, a: 0}
+      particlePrefab: {fileID: 4241586625576045492, guid: 740a075ec824a5c4f8f4b173733963fe,
+        type: 3}
+    - animation: {fileID: 9100000, guid: 719647bbd27034f40ab8492f24de5dab, type: 2}
+      displayImg: {fileID: -2766811678988084853, guid: 238a1026acbaf57498682836e3b76d78,
+        type: 3}
+      charColor: {r: 0.5921569, g: 0.40000004, b: 0.98823535, a: 0}
+      particlePrefab: {fileID: 4241586625576045492, guid: 740a075ec824a5c4f8f4b173733963fe,
+        type: 3}
+    - animation: {fileID: 9100000, guid: 2c42eebef542bbc47bc85cb4b6c4b518, type: 2}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 4241586625576045492, guid: 740a075ec824a5c4f8f4b173733963fe,
+        type: 3}
+    - animation: {fileID: 9100000, guid: 2c42eebef542bbc47bc85cb4b6c4b518, type: 2}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 4241586625576045492, guid: 740a075ec824a5c4f8f4b173733963fe,
+        type: 3}
     displaySprite: {fileID: -1528581941426886678, guid: 850197bee4aebbe429e5ed2900b4bc94,
-      type: 3}
-    particlePrefab: {fileID: 4241586625576045492, guid: 740a075ec824a5c4f8f4b173733963fe,
       type: 3}
   - tag: DrillMode
     name: Drill
     gameMode: {fileID: 11400000, guid: d026faec07a5a2e4aa3e155c5d2e6428, type: 2}
     skin:
-    - {fileID: 9100000, guid: 7f25c3f4c3a25b04b88462c7e2f0ed93, type: 2}
-    - {fileID: 9100000, guid: 9f48ca4e1d3f8934a88d388d537c92a5, type: 2}
+    - animation: {fileID: 9100000, guid: 7f25c3f4c3a25b04b88462c7e2f0ed93, type: 2}
+      displayImg: {fileID: 6912520627882625755, guid: 5df8e5ae83d9d7b43b93d4ea4fd9e2fc,
+        type: 3}
+      charColor: {r: 0.82745105, g: 0.40784317, b: 0.07450981, a: 0}
+      particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
+        type: 3}
+    - animation: {fileID: 9100000, guid: 9f48ca4e1d3f8934a88d388d537c92a5, type: 2}
+      displayImg: {fileID: 3689620898632991657, guid: 2253aa677afaa28469bce506f8021819,
+        type: 3}
+      charColor: {r: 0.16078432, g: 0.7137255, b: 0.6901961, a: 0}
+      particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
+        type: 3}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
     displaySprite: {fileID: 6912520627882625755, guid: 5df8e5ae83d9d7b43b93d4ea4fd9e2fc,
-      type: 3}
-    particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
       type: 3}
   - tag: UFOMode
     name: UFO
     gameMode: {fileID: 11400000, guid: 5e9b043a879b0164cbf2ac81d4e7c3de, type: 2}
     skin:
-    - {fileID: 9100000, guid: 7b01c8010d3055f4886ab550025a6183, type: 2}
-    - {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
+    - animation: {fileID: 9100000, guid: 7b01c8010d3055f4886ab550025a6183, type: 2}
+      displayImg: {fileID: -2414885002918159582, guid: 1b8970c4c3d4e534f86ba420be626d6e,
+        type: 3}
+      charColor: {r: 0.77647066, g: 0.7254902, b: 0.098039225, a: 0}
+      particlePrefab: {fileID: 4211213139286153919, guid: 7ef38615fb4868c44b8dc8d90f641b14,
+        type: 3}
+    - animation: {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
+      displayImg: {fileID: -4378242414276594827, guid: d136e22b2ac20c34cada291f53e6f3b9,
+        type: 3}
+      charColor: {r: 0.72156864, g: 0.43137258, b: 0.47450984, a: 0}
+      particlePrefab: {fileID: 4211213139286153919, guid: 7ef38615fb4868c44b8dc8d90f641b14,
+        type: 3}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
     displaySprite: {fileID: -2414885002918159582, guid: 1b8970c4c3d4e534f86ba420be626d6e,
-      type: 3}
-    particlePrefab: {fileID: 4211213139286153919, guid: 7ef38615fb4868c44b8dc8d90f641b14,
       type: 3}
   - tag: DefenderMode
     name: Defender
     gameMode: {fileID: 11400000, guid: f34e52e61a72b2d4993cb7f1326d3886, type: 2}
     skin:
-    - {fileID: 9100000, guid: eda2112a79b041f4595c58dbd4cd7f8d, type: 2}
-    - {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
+    - animation: {fileID: 9100000, guid: eda2112a79b041f4595c58dbd4cd7f8d, type: 2}
+      displayImg: {fileID: -7309568689704485633, guid: db893382527184743857c18b7a2de873,
+        type: 3}
+      charColor: {r: 0.82745105, g: 0.20000002, b: 0.19215688, a: 0}
+      particlePrefab: {fileID: 8594746578002792512, guid: db443e5a24af58c468dafb329d476895,
+        type: 3}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
     displaySprite: {fileID: -6060674809971818376, guid: db893382527184743857c18b7a2de873,
-      type: 3}
-    particlePrefab: {fileID: 8594746578002792512, guid: db443e5a24af58c468dafb329d476895,
       type: 3}
   - tag: PsychicMode
     name: Psychic
     gameMode: {fileID: 11400000, guid: f34e52e61a72b2d4993cb7f1326d3886, type: 2}
-    skin:
-    - {fileID: 9100000, guid: 2c42eebef542bbc47bc85cb4b6c4b518, type: 2}
-    - {fileID: 9100000, guid: 4c2ea2473f043e542b27c6818967948f, type: 2}
+    skin: []
     displaySprite: {fileID: -6060674809971818376, guid: db893382527184743857c18b7a2de873,
-      type: 3}
-    particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
       type: 3}

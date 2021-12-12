@@ -9,14 +9,7 @@ public class FlapperMode : PlayerMode //Code for the classic flappy mode!
     {
         if (Input.GetKeyDown(player.savedKey))
         {
-            //Go Up!
-            player.pos.y = player.bounceVal;
-
-            //Reduce Some Player KB
-            player.bounceEffectTimer *= 0.5f;
-
-            //Play PS
-            player.flapPS.Play();
+            Flap(player);
         }
     }
     public override void Reset(FishBirdController player)
@@ -24,7 +17,24 @@ public class FlapperMode : PlayerMode //Code for the classic flappy mode!
         //Set Gravity and stop the particle system
         player.GravityScale(1);
         player.flapPS.Stop();
-        var main = player.flapPS.main;
-        main.loop = false;
+
+        ActivatePS(player, false);
+
+        if (Input.GetKey(player.savedKey))
+        {
+            Flap(player);
+        }
+    }
+
+    private void Flap(FishBirdController player)
+    {
+        //Go Up!
+        player.pos.y = player.bounceVal;
+
+        //Reduce Some Player KB
+        player.bounceEffectTimer *= 0.5f;
+
+        //Play PS
+        player.flapPS.Play();
     }
 }

@@ -85,7 +85,7 @@ public class ModifierSetup : MonoBehaviour
         }
 
         //Check Safety Net
-        tempBool = InventoryManager.instance.CheckItemValid("SafetyNet"); 
+        tempBool = InventoryManager.instance.CheckItemValid("SafetyNet");
         playerOne.isNet = tempBool;
         playerTwo.isNet = tempBool;
 
@@ -148,6 +148,8 @@ public class ModifierSetup : MonoBehaviour
 
         //Check InfipaddleBounds
         paddleBoundery.SetActive(!InventoryManager.instance.CheckItemValid("InfipaddleBounds"));
+
+        playerM.GameStart();
     }
 
     public void ScoreChange(int score, bool direction)

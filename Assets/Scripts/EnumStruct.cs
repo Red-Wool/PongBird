@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnumStruct : MonoBehaviour
 {
@@ -39,8 +40,8 @@ public struct PlayerModeData
     [SerializeField] private string name; public string Name { get { return name; } }
     [SerializeField] private PlayerMode gameMode; public PlayerMode GameMode { get { return gameMode; } }
 
-    [SerializeField] private RuntimeAnimatorController[] skin; 
-    public RuntimeAnimatorController GetSkin(int i)
+    [SerializeField] private PlayerModeSkin[] skin; 
+    public PlayerModeSkin GetSkin(int i)
     {
         if (i < 0 || i >= skin.Length)
         {
@@ -50,7 +51,16 @@ public struct PlayerModeData
         return skin[Mathf.Clamp(i, 0, skin.Length - 1)];
     }
     [SerializeField] private Sprite displaySprite; public Sprite Sprite { get { return displaySprite; } }
-    [SerializeField] private GameObject particlePrefab; public GameObject Particle { get { return particlePrefab; } }
+    //[SerializeField] private GameObject particlePrefab; public GameObject Particle { get { return particlePrefab; } }
+}
+
+[System.Serializable]
+public struct PlayerModeSkin
+{
+    public RuntimeAnimatorController animation;
+    public Sprite displayImg;
+    [ColorUsage(showAlpha:false)]public Color charColor;
+    public GameObject particlePrefab;
 }
 
 public enum ShopItemType

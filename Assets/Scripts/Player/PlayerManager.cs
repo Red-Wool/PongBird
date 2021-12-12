@@ -15,6 +15,14 @@ public class PlayerManager : MonoBehaviour
     private GameObject coopPlayerTwo;
 
     [SerializeField]
+    private GameObject[] allPlayers;
+
+    [SerializeField] private int playerNum;
+
+    [SerializeField]
+    private PlayerUIDisplay[] charDisplays;
+
+    [SerializeField]
     private Toggle coopToggle;
 
     [SerializeField] 
@@ -48,6 +56,11 @@ public class PlayerManager : MonoBehaviour
 
                 respawnTimer = 0f;
             }
+
+        }
+
+        if (true)
+        {
 
         }
 
@@ -102,5 +115,28 @@ public class PlayerManager : MonoBehaviour
         playingCoop = coopToggle.isOn;
 
         ControlManager.instance.playingCoop = playingCoop;
+    }
+
+    public void GameStart()
+    {
+        bool tempBool = InventoryManager.instance.CheckItemValid("Hearty");
+        PlayerModeData currentMode = InventoryManager.instance.GetCurrentPlayerMode();
+
+        for (int i = 0; i < allPlayers.Length; i++)
+        {
+            charDisplays[i].Hearty(tempBool);
+
+            charDisplays[i].SetUp(allPlayers[i].GetComponent<FishBirdController>(), currentMode.GetSkin(i).displayImg, currentMode.GetSkin(i).charColor);
+
+            if (playerNum == 1 && i == 0)
+            {
+                charDisplays[i].gameObject.SetActive(tempBool);
+            }
+            else
+            {
+                charDisplays[i].gameObject.SetActive(i < playerNum);
+            }
+            
+        }
     }
 }

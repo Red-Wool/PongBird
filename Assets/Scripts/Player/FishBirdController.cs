@@ -17,7 +17,7 @@ public class FishBirdController : MonoBehaviour
 
     [SerializeField] private bool playerTwo;
 
-    private int hp;
+    private int hp; public int HP { get { return hp; } }
     [SerializeField] private Image hpBar;
 
     [HideInInspector] public bool isSnake;
@@ -58,21 +58,13 @@ public class FishBirdController : MonoBehaviour
         SaveData.DataLoaded += SetControl;
     }
 
-    /*private void FixedUpdate()
-    {
-        if (hpBar.gameObject.activeSelf)
-        {
-            hpBar.fillAmount = hp / 4f;
-        }
-    }*/
-
     // Update is called once per frame
     void Update()
     {
-        if (hpBar.gameObject.activeSelf)
+        /*if (hpBar.gameObject.activeSelf)
         {
             hpBar.fillAmount = hp / 4f;
-        }
+        }*/
 
         if (!dead) //Make Sure Not dead!
         {
@@ -173,9 +165,8 @@ public class FishBirdController : MonoBehaviour
     public void SetMode(PlayerModeData data, int playerNum)
     {
         playerMode = data.GameMode;
-        playerMode.Reset(this);
 
-        GetComponent<Animator>().runtimeAnimatorController = data.GetSkin(playerNum);
+        GetComponent<Animator>().runtimeAnimatorController = data.GetSkin(playerNum).animation;
 
         flapPS.Stop();
         var main = flapPS.main;
@@ -184,7 +175,7 @@ public class FishBirdController : MonoBehaviour
         Transform temp = gameObject.transform.Find(data.Tag);
         if (temp == null)
         {
-            flapPS = Instantiate(data.Particle, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+            flapPS = Instantiate(data.GetSkin(playerNum).particlePrefab, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
             flapPS.gameObject.name = data.Tag;
         }
         else
@@ -193,6 +184,21 @@ public class FishBirdController : MonoBehaviour
             flapPS = ps;
         }
 
+        /*if (isActiveAndEnabled)
+        {
+            StartCoroutine("InvincibleCountdown", 0.2f);
+        }*/
+        playerMode.Reset(this);
+    }
+
+    private IEnumerator SwitchMode(float time)
+    {
+        GravityScale(0f);
+        rb.velocity = Vector3.zero;
+
+        yield return new WaitForSeconds(time);
+
+        playerMode.Reset(this);
     }
 
     public void SetInvincible(float time)
@@ -223,7 +229,7 @@ public class FishBirdController : MonoBehaviour
 
     public void SetUpHP(bool flag)
     {
-        hpBar.gameObject.SetActive(flag);
+        //hpBar.gameObject.SetActive(flag);
         hp = flag ? 4 : 1;
     }
 

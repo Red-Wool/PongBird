@@ -19,9 +19,7 @@ public class DrillMode : PlayerMode //Code for our favorite Drill
         if (Input.GetKeyDown(player.savedKey))
         {
             //Set PS to loop
-            var main = player.flapPS.main;
-            main.loop = true;
-            player.flapPS.Play();
+            ActivatePS(player, true);
         }
         else if (Input.GetKey(player.savedKey))
         {
@@ -34,12 +32,13 @@ public class DrillMode : PlayerMode //Code for our favorite Drill
         else if (Input.GetKeyUp(player.savedKey))
         {
             //Stop the PS!
-            var main = player.flapPS.main;
-            main.loop = false;
+            ActivatePS(player, false);
         }
     }
     public override void Reset(FishBirdController player)
     {
+        ActivatePS(player, Input.GetKey(player.savedKey));
+
         //Set gravity
         player.GravityScale(1);
     }
