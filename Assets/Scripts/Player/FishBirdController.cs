@@ -29,7 +29,7 @@ public class FishBirdController : MonoBehaviour
     private Vector3 bounceDirection;
     [HideInInspector] public float bounceEffectTimer;
 
-    bool posDirection = true;
+    bool posDirection = true; public bool Direction { get { return posDirection; } }
 
     Rigidbody2D rb; public Rigidbody2D GetRb() { return rb; }
     SpriteRenderer sr;
@@ -175,7 +175,7 @@ public class FishBirdController : MonoBehaviour
         Transform temp = gameObject.transform.Find(data.Tag);
         if (temp == null)
         {
-            flapPS = Instantiate(data.GetSkin(playerNum).particlePrefab, transform.position, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+            flapPS = Instantiate(data.GetSkin(playerNum).particlePrefab, transform.position, Quaternion.identity, GetComponent<Transform>()).gameObject.GetComponent<ParticleSystem>();
             flapPS.gameObject.name = data.Tag;
         }
         else

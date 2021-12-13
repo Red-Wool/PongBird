@@ -114,6 +114,9 @@ public class PlayerManager : MonoBehaviour
     {
         playingCoop = coopToggle.isOn;
 
+        //This is a temp solution! remember to remove this later
+        playerNum = playingCoop ? 2 : 1;
+
         ControlManager.instance.playingCoop = playingCoop;
     }
 

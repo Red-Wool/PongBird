@@ -101,7 +101,7 @@ MonoBehaviour:
   - tag: PsychicMode
     name: Psychic!
     color: {r: 0.7874864, g: 0.16862744, b: 0.80784315, a: 0}
-    desc: "grumpy Guardian \nof an unknown treasure"
+    desc: "<size=16>Has the innate ability to \nknow where the paddle is"
     price: 100
     type: 1
   - tag: Flipside
@@ -117,7 +117,9 @@ MonoBehaviour:
   - tag: Betrayal
     name: Betrayal
     color: {r: 0.7830189, g: 0.535644, b: 0.44691172, a: 0}
-    desc: ggg
+    desc: 'Be careful who
+
+      you trust...'
     price: 100
     type: 0
   - tag: Curveball
@@ -137,6 +139,6 @@ MonoBehaviour:
     color: {r: 0.9058824, g: 0.9803922, b: 0.20392159, a: 0}
     desc: '<size=16>Ready to switch things up?
 
-      Character change every score!'
+      Character change every paddle bounce!'
     price: 100
     type: 0

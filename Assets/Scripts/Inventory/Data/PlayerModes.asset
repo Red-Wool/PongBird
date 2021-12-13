@@ -103,10 +103,11 @@ MonoBehaviour:
       charColor: {r: 0.82745105, g: 0.20000002, b: 0.19215688, a: 0}
       particlePrefab: {fileID: 8594746578002792512, guid: db443e5a24af58c468dafb329d476895,
         type: 3}
-    - animation: {fileID: 0}
-      displayImg: {fileID: 0}
+    - animation: {fileID: 9100000, guid: eda2112a79b041f4595c58dbd4cd7f8d, type: 2}
+      displayImg: {fileID: 21300000, guid: 491eb7a11ad355a40a3eae487510b1a8, type: 3}
       charColor: {r: 0, g: 0, b: 0, a: 0}
-      particlePrefab: {fileID: 0}
+      particlePrefab: {fileID: 3427906306480206380, guid: 3f511d0d2efeff44cb243b809d066cc1,
+        type: 3}
     - animation: {fileID: 0}
       displayImg: {fileID: 0}
       charColor: {r: 0, g: 0, b: 0, a: 0}
@@ -119,7 +120,26 @@ MonoBehaviour:
       type: 3}
   - tag: PsychicMode
     name: Psychic
-    gameMode: {fileID: 11400000, guid: f34e52e61a72b2d4993cb7f1326d3886, type: 2}
-    skin: []
-    displaySprite: {fileID: -6060674809971818376, guid: db893382527184743857c18b7a2de873,
+    gameMode: {fileID: 11400000, guid: faf7564e4c115d744ae12e4c3a2ffa2a, type: 2}
+    skin:
+    - animation: {fileID: 9100000, guid: 0cb8c8e57a31a9f4aa24b288eba2f43e, type: 2}
+      displayImg: {fileID: -4605888680809207407, guid: f3ddde24cda3c4b4c9082777bf01ec04,
+        type: 3}
+      charColor: {r: 0.9686275, g: 0.16862746, b: 0.30980393, a: 0}
+      particlePrefab: {fileID: 8324038989856120141, guid: a858e7055b1b19b41a621c9146bc479b,
+        type: 3}
+    - animation: {fileID: 9100000, guid: b5b34b2022b1c0e4badd8614259c644e, type: 2}
+      displayImg: {fileID: 21300000, guid: 491eb7a11ad355a40a3eae487510b1a8, type: 3}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 4927737258895505976, guid: d48ce6c39559fb147a694d359f1a0dd5,
+        type: 3}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
+    - animation: {fileID: 0}
+      displayImg: {fileID: 0}
+      charColor: {r: 0, g: 0, b: 0, a: 0}
+      particlePrefab: {fileID: 0}
+    displaySprite: {fileID: -4605888680809207407, guid: f3ddde24cda3c4b4c9082777bf01ec04,
       type: 3}
