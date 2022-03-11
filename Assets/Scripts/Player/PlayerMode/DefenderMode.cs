@@ -59,7 +59,7 @@ public class DefenderMode : PlayerMode //Code for the hotheaded defender
         //Reserve a float in the player for a timer + Accerlation
         player.reserved = new float[2];
         player.reserved[0] = CalculatePos(player.transform.position.y); //-Mathf.Acos(player.transform.position.y / 8) / (4 * Mathf.PI); //Timer
-        player.reserved[1] = 0.1f * Mathf.Abs(player.transform.position.x); //Accerlation
+        player.reserved[1] = (Mathf.Abs(player.transform.position.x) > 12) ? 0.1f * Mathf.Abs(player.transform.position.x) : 0; //Accerlation
     }
 
     private float CalculatePos(float yVal)

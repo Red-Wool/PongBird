@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     private GameObject coopPlayerTwo;
 
     [SerializeField]
-    private GameObject[] allPlayers;
+    private PlayerTeam allPlayers;
 
     [SerializeField] private int playerNum;
 
